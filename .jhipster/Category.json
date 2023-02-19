@@ -1,0 +1,49 @@
+{
+  "applications": "*",
+  "changelogDate": "20230219182232",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "category",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "CategoryType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "FITNESS,WELLNESS"
+    },
+    {
+      "fieldName": "state",
+      "fieldType": "LiveState",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "CREATED,PUBLISHED,ARCHIVED"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "label",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Category",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "video",
+      "otherEntityRelationshipName": "category",
+      "relationshipName": "video",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

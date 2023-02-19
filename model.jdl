@@ -1,0 +1,128 @@
+
+entity Company {
+	code String required,
+    name String required,
+    country Country required,
+    state ClientState required,
+    license String required,
+    vatin String
+}
+
+entity Plan {
+    trial YesNo required,
+    active YesNo required,
+    price Double required,
+    start LocalDate required,
+    end LocalDate
+}
+
+entity Membership {
+    period String required,
+    license String required,
+    email String required
+}
+
+entity Contact {
+	type ContactType required,
+    name String,
+	email String,
+    phone String,
+    unit String,
+    street String,
+    number String,
+    zip String,
+    city String,
+    country String,
+}
+
+entity Person {
+    name String required,
+    surname String required,
+    email String required,
+    password String,
+    license String
+}
+
+entity Category {
+    code String required,
+    type CategoryType required,
+    state LiveState required,
+    name String required,
+    label String
+}
+
+entity Video {
+    code String required,
+    state LiveState required,
+    name String required,
+    tags String required,
+    lang Lang required,
+    url String required
+}
+
+entity Coach {
+    name String required,
+    surname String required,
+    email String required,
+    phone String,
+    resume String,
+    langs String,
+    tags String
+}
+
+enum ContactType {
+	MANAGER,
+    OPERATION,
+    BILLING
+}
+
+enum ClientState {
+    CREATED,
+    TRIAL,
+    ACTIVE,
+    CLOSE
+}
+
+enum LiveState {
+    CREATED, 
+    PUBLISHED, 
+    ARCHIVED
+}
+
+enum CategoryType {
+	FITNESS,
+    WELLNESS
+}
+
+enum YesNo {
+    Y, 
+    N
+}
+
+enum Lang {
+	EN, FR, DE
+}
+
+enum Country {
+	LU, FR, BE, DE, UK
+}
+
+relationship OneToMany {
+    Company to Contact{company}
+	Company to Plan{company},
+    Company to Membership{company},
+	Category to Video{category},
+    Coach to Video{coach}
+}
+
+// Set pagination options
+paginate Company, Plan, Membership, Person, Category, Coach, Video with pagination
+
+// Use Data Transfer Objects (DTO)
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+
+// Set an angular suffix
+// angularSuffix * with mySuffix

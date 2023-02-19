@@ -1,0 +1,54 @@
+{
+  "applications": "*",
+  "changelogDate": "20230219182234",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "coach",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "surname",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "phone",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "resume",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "langs",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "tags",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Coach",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "video",
+      "otherEntityRelationshipName": "coach",
+      "relationshipName": "video",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="plan">
+      <h2 data-cy="planDetailsHeading"><span>Plan</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ plan.id }}</span>
+        </dd>
+        <dt><span>Trial</span></dt>
+        <dd>
+          <span>{{ plan.trial }}</span>
+        </dd>
+        <dt><span>Active</span></dt>
+        <dd>
+          <span>{{ plan.active }}</span>
+        </dd>
+        <dt><span>Price</span></dt>
+        <dd>
+          <span>{{ plan.price }}</span>
+        </dd>
+        <dt><span>Start</span></dt>
+        <dd>
+          <span>{{ plan.start | formatMediumDate }}</span>
+        </dd>
+        <dt><span>End</span></dt>
+        <dd>
+          <span>{{ plan.end | formatMediumDate }}</span>
+        </dd>
+        <dt><span>Company</span></dt>
+        <dd>
+          <div *ngIf="plan.company">
+            <a [routerLink]="['/company', plan.company.id, 'view']">{{ plan.company.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/plan', plan.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
