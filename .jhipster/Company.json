@@ -1,0 +1,66 @@
+{
+  "applications": "*",
+  "changelogDate": "20230219182227",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "company",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "country",
+      "fieldType": "Country",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "LU,FR,BE,DE,UK"
+    },
+    {
+      "fieldName": "state",
+      "fieldType": "ClientState",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "CREATED,TRIAL,ACTIVE,CLOSE"
+    },
+    {
+      "fieldName": "license",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "vatin",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Company",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "contact",
+      "otherEntityRelationshipName": "company",
+      "relationshipName": "contact",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "plan",
+      "otherEntityRelationshipName": "company",
+      "relationshipName": "plan",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "membership",
+      "otherEntityRelationshipName": "company",
+      "relationshipName": "membership",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

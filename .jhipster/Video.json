@@ -1,0 +1,61 @@
+{
+  "applications": "*",
+  "changelogDate": "20230219182233",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "video",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "state",
+      "fieldType": "LiveState",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "CREATED,PUBLISHED,ARCHIVED"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "tags",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "lang",
+      "fieldType": "Lang",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "EN,FR,DE"
+    },
+    {
+      "fieldName": "url",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Video",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "category",
+      "otherEntityRelationshipName": "video",
+      "relationshipName": "category",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "coach",
+      "otherEntityRelationshipName": "video",
+      "relationshipName": "coach",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

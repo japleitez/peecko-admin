@@ -1,0 +1,64 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="video">
+      <h2 data-cy="videoDetailsHeading"><span>Video</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ video.id }}</span>
+        </dd>
+        <dt><span>Code</span></dt>
+        <dd>
+          <span>{{ video.code }}</span>
+        </dd>
+        <dt><span>State</span></dt>
+        <dd>
+          <span>{{ video.state }}</span>
+        </dd>
+        <dt><span>Name</span></dt>
+        <dd>
+          <span>{{ video.name }}</span>
+        </dd>
+        <dt><span>Tags</span></dt>
+        <dd>
+          <span>{{ video.tags }}</span>
+        </dd>
+        <dt><span>Lang</span></dt>
+        <dd>
+          <span>{{ video.lang }}</span>
+        </dd>
+        <dt><span>Url</span></dt>
+        <dd>
+          <span>{{ video.url }}</span>
+        </dd>
+        <dt><span>Category</span></dt>
+        <dd>
+          <div *ngIf="video.category">
+            <a [routerLink]="['/category', video.category.id, 'view']">{{ video.category.id }}</a>
+          </div>
+        </dd>
+        <dt><span>Coach</span></dt>
+        <dd>
+          <div *ngIf="video.coach">
+            <a [routerLink]="['/coach', video.coach.id, 'view']">{{ video.coach.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/video', video.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

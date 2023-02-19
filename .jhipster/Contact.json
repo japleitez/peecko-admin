@@ -1,0 +1,65 @@
+{
+  "applications": "*",
+  "changelogDate": "20230219182230",
+  "dto": "mapstruct",
+  "embedded": false,
+  "entityTableName": "contact",
+  "fields": [
+    {
+      "fieldName": "type",
+      "fieldType": "ContactType",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "MANAGER,OPERATION,BILLING"
+    },
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "phone",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "unit",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "street",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "number",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "zip",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "city",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "country",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Contact",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "company",
+      "otherEntityRelationshipName": "contact",
+      "relationshipName": "company",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

@@ -1,0 +1,83 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-company-heading" data-cy="CompanyCreateUpdateHeading">Create or edit a Company</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_code">Code</label>
+          <input type="text" class="form-control" name="code" id="field_code" data-cy="code" formControlName="code" />
+          <div *ngIf="editForm.get('code')!.invalid && (editForm.get('code')!.dirty || editForm.get('code')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('code')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+          <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_country">Country</label>
+          <select class="form-control" name="country" formControlName="country" id="field_country" data-cy="country">
+            <option [ngValue]="null"></option>
+            <option *ngFor="let country of countryValues" [value]="country">country</option>
+          </select>
+          <div *ngIf="editForm.get('country')!.invalid && (editForm.get('country')!.dirty || editForm.get('country')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('country')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_state">State</label>
+          <select class="form-control" name="state" formControlName="state" id="field_state" data-cy="state">
+            <option [ngValue]="null"></option>
+            <option *ngFor="let clientState of clientStateValues" [value]="clientState">clientState</option>
+          </select>
+          <div *ngIf="editForm.get('state')!.invalid && (editForm.get('state')!.dirty || editForm.get('state')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('state')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_license">License</label>
+          <input type="text" class="form-control" name="license" id="field_license" data-cy="license" formControlName="license" />
+          <div *ngIf="editForm.get('license')!.invalid && (editForm.get('license')!.dirty || editForm.get('license')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('license')?.errors?.required"> This field is required. </small>
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" for="field_vatin">Vatin</label>
+          <input type="text" class="form-control" name="vatin" id="field_vatin" data-cy="vatin" formControlName="vatin" />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
