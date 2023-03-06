@@ -82,4 +82,14 @@ public class ContactServiceImpl implements ContactService {
         log.debug("Request to delete Contact : {}", id);
         contactRepository.deleteById(id);
     }
+
+    @Override
+    public List<ContactDTO> findByCompanyId(Long companyId) {
+        log.debug("Request to find contacts by company id : {}", companyId);
+        return contactRepository
+            .findByCompanyId(companyId)
+            .stream()
+            .map(contactMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
 }

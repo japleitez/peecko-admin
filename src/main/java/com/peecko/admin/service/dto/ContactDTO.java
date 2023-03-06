@@ -36,6 +36,12 @@ public class ContactDTO implements Serializable {
 
     private CompanyDTO company;
 
+    public static final ContactDTO createInstance(ContactType type) {
+        ContactDTO instance = new ContactDTO();
+        instance.setType(type);
+        return instance;
+    }
+
     public Long getId() {
         return id;
     }

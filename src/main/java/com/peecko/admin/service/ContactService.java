@@ -53,4 +53,6 @@ public interface ContactService {
      * @param id the id of the entity.
      */
     void delete(Long id);
+
+    List<ContactDTO> findByCompanyId(Long companyId);
 }
