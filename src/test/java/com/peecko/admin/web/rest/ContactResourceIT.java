@@ -2,14 +2,20 @@ package com.peecko.admin.web.rest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
+import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 import com.peecko.admin.IntegrationTest;
+import com.peecko.admin.domain.Company;
 import com.peecko.admin.domain.Contact;
+import com.peecko.admin.domain.enumeration.ClientState;
 import com.peecko.admin.domain.enumeration.ContactType;
+import com.peecko.admin.domain.enumeration.Country;
+import com.peecko.admin.repository.CompanyRepository;
 import com.peecko.admin.repository.ContactRepository;
+import com.peecko.admin.service.dto.CompanyDTO;
 import com.peecko.admin.service.dto.ContactDTO;
 import com.peecko.admin.service.mapper.ContactMapper;
 import java.util.List;
@@ -23,6 +29,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -73,6 +80,9 @@ class ContactResourceIT {
     private ContactRepository contactRepository;
 
     @Autowired
+    private CompanyRepository companyRepository;
+
+    @Autowired
     private ContactMapper contactMapper;
 
     @Autowired
@@ -102,6 +112,10 @@ class ContactResourceIT {
             .city(DEFAULT_CITY)
             .country(DEFAULT_COUNTRY);
         return contact;
+    }
+
+    public static Company createCompanyEntity() {
+        return new Company().country(Country.LU).state(ClientState.CREATED).name("AAA").code("AAA").license("AAA").vatin("AAA");
     }
 
     /**
@@ -134,8 +148,10 @@ class ContactResourceIT {
     @Transactional
     void createContact() throws Exception {
         int databaseSizeBeforeCreate = contactRepository.findAll().size();
-        // Create the Contact
+        // Create the Contact for a given company
+        Company company = companyRepository.saveAndFlush(createCompanyEntity());
         ContactDTO contactDTO = contactMapper.toDto(contact);
+        contactDTO.setCompany(CompanyDTO.createInstance(company.getId()));
         restContactMockMvc
             .perform(
                 post(ENTITY_API_URL)
@@ -230,6 +246,27 @@ class ContactResourceIT {
             .andExpect(jsonPath("$.[*].zip").value(hasItem(DEFAULT_ZIP)))
             .andExpect(jsonPath("$.[*].city").value(hasItem(DEFAULT_CITY)))
             .andExpect(jsonPath("$.[*].country").value(hasItem(DEFAULT_COUNTRY)));
+    }
+
+    @Test
+    @Transactional
+    void getContactsByCompany() throws Exception {
+        // Initiate the database
+        Company company = companyRepository.saveAndFlush(createCompanyEntity());
+        int count = 17;
+        for (int i = 0; i < count; i++) {
+            Contact contact1 = createEntity(em);
+            contact1.setCompany(company);
+            contactRepository.saveAndFlush(contact1);
+        }
+
+        String url = "/api/companies/" + company.getId() + "/contacts";
+
+        restContactMockMvc
+            .perform(get(url))
+            .andExpect(status().isOk())
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(jsonPath("$").value(hasSize(count)));
     }
 
     @Test

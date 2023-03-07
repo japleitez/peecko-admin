@@ -1,6 +1,7 @@
 package com.peecko.admin.web.rest;
 
 import com.peecko.admin.repository.ContactRepository;
+import com.peecko.admin.service.CompanyService;
 import com.peecko.admin.service.ContactService;
 import com.peecko.admin.service.dto.ContactDTO;
 import com.peecko.admin.web.rest.errors.BadRequestAlertException;
@@ -37,9 +38,12 @@ public class ContactResource {
 
     private final ContactRepository contactRepository;
 
-    public ContactResource(ContactService contactService, ContactRepository contactRepository) {
+    private final CompanyService companyService;
+
+    public ContactResource(ContactService contactService, ContactRepository contactRepository, CompanyService companyService) {
         this.contactService = contactService;
         this.contactRepository = contactRepository;
+        this.companyService = companyService;
     }
 
     /**
@@ -55,7 +59,15 @@ public class ContactResource {
         if (contactDTO.getId() != null) {
             throw new BadRequestAlertException("A new contact cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        ContactDTO result = contactService.save(contactDTO);
+        if (contactDTO.getCompany() == null || contactDTO.getCompany().getId() == null) {
+            throw new BadRequestAlertException("A new contact requires a company", ENTITY_NAME, "idexists");
+        }
+        ContactDTO result = companyService
+            .findOne(contactDTO.getCompany().getId())
+            .map(company -> {
+                return contactService.save(contactDTO);
+            })
+            .orElseThrow(() -> new BadRequestAlertException("Company not found", ENTITY_NAME, "idnotfound"));
         return ResponseEntity
             .created(new URI("/api/contacts/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, false, ENTITY_NAME, result.getId().toString()))
@@ -141,6 +153,12 @@ public class ContactResource {
     public List<ContactDTO> getAllContacts() {
         log.debug("REST request to get all Contacts");
         return contactService.findAll();
+    }
+
+    @GetMapping("/companies/{companyId}/contacts")
+    public List<ContactDTO> getContactsByCompanyId(@PathVariable(value = "companyId") Long companyId) {
+        log.debug("REST request to get contacts for a given company");
+        return contactService.findByCompanyId(companyId);
     }
 
     /**

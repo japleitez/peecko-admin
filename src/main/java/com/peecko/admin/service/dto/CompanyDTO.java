@@ -31,6 +31,12 @@ public class CompanyDTO implements Serializable {
 
     private String vatin;
 
+    public static CompanyDTO createInstance(Long id) {
+        CompanyDTO dto = new CompanyDTO();
+        dto.id = id;
+        return dto;
+    }
+
     public Long getId() {
         return id;
     }
