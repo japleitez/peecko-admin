@@ -2,7 +2,6 @@ package com.peecko.admin.web.rest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -29,7 +28,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -250,23 +248,22 @@ class ContactResourceIT {
 
     @Test
     @Transactional
-    void getContactsByCompany() throws Exception {
+    void getContactsByCompanyAndType() throws Exception {
         // Initiate the database
         Company company = companyRepository.saveAndFlush(createCompanyEntity());
-        int count = 17;
-        for (int i = 0; i < count; i++) {
-            Contact contact1 = createEntity(em);
-            contact1.setCompany(company);
-            contactRepository.saveAndFlush(contact1);
-        }
+        Contact billingContact = createEntity(em);
+        billingContact.setType(ContactType.BILLING);
+        billingContact.setCompany(company);
+        contactRepository.saveAndFlush(billingContact);
 
-        String url = "/api/companies/" + company.getId() + "/contacts";
+        String url = "/api/companies/{companyId}/contacts?type={type}";
 
         restContactMockMvc
-            .perform(get(url))
+            .perform(get(url, company.getId(), ContactType.BILLING))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-            .andExpect(jsonPath("$").value(hasSize(count)));
+            .andExpect(jsonPath("$.id").value(billingContact.getId().intValue()))
+            .andExpect(jsonPath("$.type").value(billingContact.getType().toString()));
     }
 
     @Test

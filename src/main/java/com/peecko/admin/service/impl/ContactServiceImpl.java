@@ -1,6 +1,7 @@
 package com.peecko.admin.service.impl;
 
 import com.peecko.admin.domain.Contact;
+import com.peecko.admin.domain.enumeration.ContactType;
 import com.peecko.admin.repository.ContactRepository;
 import com.peecko.admin.service.ContactService;
 import com.peecko.admin.service.dto.ContactDTO;
@@ -83,13 +84,8 @@ public class ContactServiceImpl implements ContactService {
         contactRepository.deleteById(id);
     }
 
-    @Override
-    public List<ContactDTO> findByCompanyId(Long companyId) {
-        log.debug("Request to find contacts by company id : {}", companyId);
-        return contactRepository
-            .findByCompanyId(companyId)
-            .stream()
-            .map(contactMapper::toDto)
-            .collect(Collectors.toCollection(LinkedList::new));
+    public Optional<ContactDTO> findByCompanyAndType(Long companyId, ContactType type) {
+        log.debug("Request to find Contact by company id : {} and type : {}", companyId, type);
+        return contactRepository.findByCompanyAndType(companyId, type).map(contactMapper::toDto);
     }
 }

@@ -1,5 +1,6 @@
 package com.peecko.admin.service;
 
+import com.peecko.admin.domain.enumeration.ContactType;
 import com.peecko.admin.service.dto.ContactDTO;
 import java.util.List;
 import java.util.Optional;
@@ -54,5 +55,5 @@ public interface ContactService {
      */
     void delete(Long id);
 
-    List<ContactDTO> findByCompanyId(Long companyId);
+    Optional<ContactDTO> findByCompanyAndType(Long companyId, ContactType type);
 }

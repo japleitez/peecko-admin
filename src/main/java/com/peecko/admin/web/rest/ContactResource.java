@@ -1,5 +1,6 @@
 package com.peecko.admin.web.rest;
 
+import com.peecko.admin.domain.enumeration.ContactType;
 import com.peecko.admin.repository.ContactRepository;
 import com.peecko.admin.service.CompanyService;
 import com.peecko.admin.service.ContactService;
@@ -155,10 +156,21 @@ public class ContactResource {
         return contactService.findAll();
     }
 
+    /**
+     * {@code GET  /companies/:companyId/contacts?type=}
+     *
+     * @param companyId the company id
+     * @param type the contact type
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the contactDTO, or with status {@code 404 (Not Found)}.
+     */
     @GetMapping("/companies/{companyId}/contacts")
-    public List<ContactDTO> getContactsByCompanyId(@PathVariable(value = "companyId") Long companyId) {
-        log.debug("REST request to get contacts for a given company");
-        return contactService.findByCompanyId(companyId);
+    public ResponseEntity<ContactDTO> getContactsByCompanyId(
+        @PathVariable(value = "companyId") Long companyId,
+        @RequestParam ContactType type
+    ) {
+        log.debug("REST request to get Contact for a given company and type");
+        Optional<ContactDTO> contactDTO = contactService.findByCompanyAndType(companyId, type);
+        return ResponseUtil.wrapOrNotFound(contactDTO);
     }
 
     /**
