@@ -15,6 +15,7 @@ export type EntityArrayResponseType = HttpResponse<IContact[]>;
 @Injectable({ providedIn: 'root' })
 export class ContactService {
   protected resourceUrl = this.applicationConfigService.getEndpointFor('api/contacts');
+  protected companiesUrl = this.applicationConfigService.getEndpointFor('api/companies');
 
   constructor(protected http: HttpClient, protected applicationConfigService: ApplicationConfigService) {}
 
@@ -32,6 +33,10 @@ export class ContactService {
 
   find(id: number): Observable<EntityResponseType> {
     return this.http.get<IContact>(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  }
+
+  findByCompanyIdAndType(id: number, type: string): Observable<EntityResponseType> {
+    return this.http.get<IContact>(`${this.companiesUrl}/${id}/contacts?type=${type}`, { observe: 'response' });
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {

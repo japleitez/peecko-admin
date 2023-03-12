@@ -164,7 +164,7 @@ public class ContactResource {
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the contactDTO, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/companies/{companyId}/contacts")
-    public ResponseEntity<ContactDTO> getContactsByCompanyId(
+    public ResponseEntity<ContactDTO> getContactByCompanyAndType(
         @PathVariable(value = "companyId") Long companyId,
         @RequestParam ContactType type
     ) {

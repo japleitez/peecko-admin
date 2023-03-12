@@ -5,9 +5,10 @@ import { CompanyDetailComponent } from './detail/company-detail.component';
 import { CompanyUpdateComponent } from './update/company-update.component';
 import { CompanyDeleteDialogComponent } from './delete/company-delete-dialog.component';
 import { CompanyRoutingModule } from './route/company-routing.module';
+import { AddressModule } from '../address/address.module';
 
 @NgModule({
-  imports: [SharedModule, CompanyRoutingModule],
+  imports: [SharedModule, CompanyRoutingModule, AddressModule],
   declarations: [CompanyComponent, CompanyDetailComponent, CompanyUpdateComponent, CompanyDeleteDialogComponent],
 })
 export class CompanyModule {}

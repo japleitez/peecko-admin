@@ -1,22 +1,25 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 
 import { IContact } from '../../contact/contact.model';
+import { ContactService, EntityResponseType } from '../../contact/service/contact.service';
 
 @Component({
   selector: 'address-detail',
   templateUrl: './address-detail.component.html',
 })
 export class AddressDetailComponent implements OnInit {
-  @Input() companyId = '';
-  @Input() contactType = '';
+  @Input() companyId: number = 0;
+  @Input() type: string = '';
+
   contact: IContact | null = null;
 
-  constructor(protected activatedRoute: ActivatedRoute) {}
+  constructor(protected contactService: ContactService) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ contact }) => {
-      this.contact = contact;
+    this.contactService.findByCompanyIdAndType(this.companyId, this.type).subscribe({
+      next: (res: EntityResponseType) => {
+        this.contact = res.body;
+      },
     });
   }
 

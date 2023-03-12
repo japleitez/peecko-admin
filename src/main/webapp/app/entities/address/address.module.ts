@@ -5,5 +5,6 @@ import { AddressDetailComponent } from './detail/address-detail.component';
 @NgModule({
   imports: [SharedModule],
   declarations: [AddressDetailComponent],
+  exports: [AddressDetailComponent],
 })
 export class AddressModule {}
