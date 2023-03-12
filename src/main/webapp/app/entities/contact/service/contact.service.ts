@@ -6,6 +6,7 @@ import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { IContact, NewContact } from '../contact.model';
+import { ContactType } from '../../enumerations/contact-type.model';
 
 export type PartialUpdateContact = Partial<IContact> & Pick<IContact, 'id'>;
 
@@ -74,5 +75,13 @@ export class ContactService {
       return [...contactsToAdd, ...contactCollection];
     }
     return contactCollection;
+  }
+
+  emptyContact(type: string): IContact {
+    const ec: IContact = {
+      id: 0,
+      type: type as ContactType,
+    };
+    return ec;
   }
 }

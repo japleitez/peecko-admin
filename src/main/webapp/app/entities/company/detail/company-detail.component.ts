@@ -10,7 +10,9 @@ import { ICompany } from '../company.model';
 export class CompanyDetailComponent implements OnInit {
   company: ICompany | null = null;
   companyId: number = 0;
+  billing: string = 'BILLING';
   manager: string = 'MANAGER';
+  operation: string = 'OPERATION';
 
   constructor(protected activatedRoute: ActivatedRoute) {}
 

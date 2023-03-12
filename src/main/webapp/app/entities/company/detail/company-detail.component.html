@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-center">
-  <div class="col-8">
+  <div class="pk-grid-container-4">
     <div *ngIf="company">
       <h2 data-cy="companyDetailsHeading"><span>Company</span></h2>
 
@@ -48,8 +48,17 @@
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
       </button>
     </div>
+
+    <div>
+      <address-detail [companyId]="companyId" [type]="billing"></address-detail>
+    </div>
+
     <div>
       <address-detail [companyId]="companyId" [type]="manager"></address-detail>
+    </div>
+
+    <div>
+      <address-detail [companyId]="companyId" [type]="operation"></address-detail>
     </div>
   </div>
 </div>
