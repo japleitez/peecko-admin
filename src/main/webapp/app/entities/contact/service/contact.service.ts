@@ -78,10 +78,9 @@ export class ContactService {
   }
 
   emptyContact(type: string): IContact {
-    const ec: IContact = {
+    return {
       id: 0,
       type: type as ContactType,
     };
-    return ec;
   }
 }

@@ -1,11 +1,9 @@
 <div *ngIf="contact">
-  <h2 data-cy="contactDetailsHeading"><span>Contact</span></h2>
+  <h2 data-cy="contactDetailsHeading">
+    <span>{{ title }}</span>
+  </h2>
 
   <hr />
-
-  <jhi-alert-error></jhi-alert-error>
-
-  <jhi-alert></jhi-alert>
 
   <dl class="row-md jh-entity-details">
     <dt><span>ID</span></dt>

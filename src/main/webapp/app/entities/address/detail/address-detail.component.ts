@@ -9,6 +9,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   templateUrl: './address-detail.component.html',
 })
 export class AddressDetailComponent implements OnInit {
+  @Input() title: string = 'contact';
   @Input() companyId: number = 0;
   @Input() type: string = '';
 
