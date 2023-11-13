@@ -1,0 +1,80 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-liked-video-heading" data-cy="LikedVideoCreateUpdateHeading">Create or edit a Liked Video</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_videoId">Video Id</label>
+          <input type="number" class="form-control" name="videoId" id="field_videoId" data-cy="videoId" formControlName="videoId" />
+          <div *ngIf="editForm.get('videoId')!.invalid && (editForm.get('videoId')!.dirty || editForm.get('videoId')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('videoId')?.errors?.required">This field is required.</small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('videoId')?.errors?.number">This field should be a number.</small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_personId">Person Id</label>
+          <input type="number" class="form-control" name="personId" id="field_personId" data-cy="personId" formControlName="personId" />
+          <div *ngIf="editForm.get('personId')!.invalid && (editForm.get('personId')!.dirty || editForm.get('personId')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('personId')?.errors?.required">This field is required.</small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('personId')?.errors?.number">This field should be a number.</small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_coachId">Coach Id</label>
+          <input type="number" class="form-control" name="coachId" id="field_coachId" data-cy="coachId" formControlName="coachId" />
+          <div *ngIf="editForm.get('coachId')!.invalid && (editForm.get('coachId')!.dirty || editForm.get('coachId')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('coachId')?.errors?.required">This field is required.</small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('coachId')?.errors?.number">This field should be a number.</small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_created">Created</label>
+          <div class="d-flex">
+            <input
+              id="field_created"
+              data-cy="created"
+              type="datetime-local"
+              class="form-control"
+              name="created"
+              formControlName="created"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+          <div *ngIf="editForm.get('created')!.invalid && (editForm.get('created')!.dirty || editForm.get('created')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('created')?.errors?.required">This field is required.</small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('created')?.errors?.datetimelocal"
+              >This field should be a date and time.</small
+            >
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="securedRequest">
+      <h2 data-cy="securedRequestDetailsHeading"><span>Secured Request</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ securedRequest.id }}</span>
+        </dd>
+        <dt><span>Request Id</span></dt>
+        <dd>
+          <span>{{ securedRequest.requestId }}</span>
+        </dd>
+        <dt><span>Pin Code</span></dt>
+        <dd>
+          <span>{{ securedRequest.pinCode }}</span>
+        </dd>
+        <dt><span>Email</span></dt>
+        <dd>
+          <span>{{ securedRequest.email }}</span>
+        </dd>
+        <dt><span>Created</span></dt>
+        <dd>
+          <span>{{ securedRequest.created | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Expires</span></dt>
+        <dd>
+          <span>{{ securedRequest.expires | formatMediumDatetime }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/secured-request', securedRequest.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

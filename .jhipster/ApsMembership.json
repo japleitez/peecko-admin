@@ -1,0 +1,35 @@
+{
+  "applications": ["admin"],
+  "changelogDate": "20231113211410",
+  "entityTableName": "aps_membership",
+  "fields": [
+    {
+      "fieldName": "period",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "license",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "username",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "ApsMembership",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "apsOrder",
+      "otherEntityRelationshipName": "apsMembership",
+      "relationshipName": "apsOrder",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

@@ -1,0 +1,147 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-aps-account-heading" data-cy="ApsAccountCreateUpdateHeading">Create or edit a Aps Account</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_name">Name</label>
+          <input type="text" class="form-control" name="name" id="field_name" data-cy="name" formControlName="name" />
+          <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('name')?.errors?.required">This field is required.</small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_username">Username</label>
+          <input type="text" class="form-control" name="username" id="field_username" data-cy="username" formControlName="username" />
+          <div *ngIf="editForm.get('username')!.invalid && (editForm.get('username')!.dirty || editForm.get('username')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('username')?.errors?.required">This field is required.</small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_verified">Verified</label>
+          <select class="form-control" name="verified" formControlName="verified" id="field_verified" data-cy="verified">
+            <option [ngValue]="null"></option>
+            <option *ngFor="let yesNo of yesNoValues" [value]="yesNo">{{ yesNo }}</option>
+          </select>
+          <div *ngIf="editForm.get('verified')!.invalid && (editForm.get('verified')!.dirty || editForm.get('verified')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('verified')?.errors?.required">This field is required.</small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_language">Language</label>
+          <select class="form-control" name="language" formControlName="language" id="field_language" data-cy="language">
+            <option [ngValue]="null"></option>
+            <option *ngFor="let language of languageValues" [value]="language">{{ language }}</option>
+          </select>
+          <div *ngIf="editForm.get('language')!.invalid && (editForm.get('language')!.dirty || editForm.get('language')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('language')?.errors?.required">This field is required.</small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_email">Email</label>
+          <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_emailVerified">Email Verified</label>
+          <select
+            class="form-control"
+            name="emailVerified"
+            formControlName="emailVerified"
+            id="field_emailVerified"
+            data-cy="emailVerified"
+          >
+            <option [ngValue]="null"></option>
+            <option *ngFor="let yesNo of yesNoValues" [value]="yesNo">{{ yesNo }}</option>
+          </select>
+          <div
+            *ngIf="
+              editForm.get('emailVerified')!.invalid && (editForm.get('emailVerified')!.dirty || editForm.get('emailVerified')!.touched)
+            "
+          >
+            <small class="form-text text-danger" *ngIf="editForm.get('emailVerified')?.errors?.required">This field is required.</small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_license">License</label>
+          <input type="text" class="form-control" name="license" id="field_license" data-cy="license" formControlName="license" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_active">Active</label>
+          <select class="form-control" name="active" formControlName="active" id="field_active" data-cy="active">
+            <option [ngValue]="null"></option>
+            <option *ngFor="let yesNo of yesNoValues" [value]="yesNo">{{ yesNo }}</option>
+          </select>
+          <div *ngIf="editForm.get('active')!.invalid && (editForm.get('active')!.dirty || editForm.get('active')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('active')?.errors?.required">This field is required.</small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_password">Password</label>
+          <input type="text" class="form-control" name="password" id="field_password" data-cy="password" formControlName="password" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_created">Created</label>
+          <div class="d-flex">
+            <input
+              id="field_created"
+              data-cy="created"
+              type="datetime-local"
+              class="form-control"
+              name="created"
+              formControlName="created"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_updated">Updated</label>
+          <div class="d-flex">
+            <input
+              id="field_updated"
+              data-cy="updated"
+              type="datetime-local"
+              class="form-control"
+              name="updated"
+              formControlName="updated"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

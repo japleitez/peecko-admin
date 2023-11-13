@@ -1,0 +1,86 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-video-stat-heading" data-cy="VideoStatCreateUpdateHeading">Create or edit a Video Stat</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_videoId">Video Id</label>
+          <input type="number" class="form-control" name="videoId" id="field_videoId" data-cy="videoId" formControlName="videoId" />
+          <div *ngIf="editForm.get('videoId')!.invalid && (editForm.get('videoId')!.dirty || editForm.get('videoId')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('videoId')?.errors?.required">This field is required.</small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('videoId')?.errors?.number">This field should be a number.</small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_categoryId">Category Id</label>
+          <input
+            type="number"
+            class="form-control"
+            name="categoryId"
+            id="field_categoryId"
+            data-cy="categoryId"
+            formControlName="categoryId"
+          />
+          <div *ngIf="editForm.get('categoryId')!.invalid && (editForm.get('categoryId')!.dirty || editForm.get('categoryId')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('categoryId')?.errors?.required">This field is required.</small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('categoryId')?.errors?.number"
+              >This field should be a number.</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_coachId">Coach Id</label>
+          <input type="number" class="form-control" name="coachId" id="field_coachId" data-cy="coachId" formControlName="coachId" />
+          <div *ngIf="editForm.get('coachId')!.invalid && (editForm.get('coachId')!.dirty || editForm.get('coachId')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('coachId')?.errors?.required">This field is required.</small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('coachId')?.errors?.number">This field should be a number.</small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_liked">Liked</label>
+          <input type="number" class="form-control" name="liked" id="field_liked" data-cy="liked" formControlName="liked" />
+          <div *ngIf="editForm.get('liked')!.invalid && (editForm.get('liked')!.dirty || editForm.get('liked')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('liked')?.errors?.required">This field is required.</small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('liked')?.errors?.number">This field should be a number.</small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_viewed">Viewed</label>
+          <input type="number" class="form-control" name="viewed" id="field_viewed" data-cy="viewed" formControlName="viewed" />
+          <div *ngIf="editForm.get('viewed')!.invalid && (editForm.get('viewed')!.dirty || editForm.get('viewed')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('viewed')?.errors?.required">This field is required.</small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('viewed')?.errors?.number">This field should be a number.</small>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

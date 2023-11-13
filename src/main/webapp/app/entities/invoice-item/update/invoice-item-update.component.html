@@ -1,0 +1,182 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-invoice-item-heading" data-cy="InvoiceItemCreateUpdateHeading">Create or edit a Invoice Item</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_type">Type</label>
+          <select class="form-control" name="type" formControlName="type" id="field_type" data-cy="type">
+            <option [ngValue]="null"></option>
+            <option *ngFor="let productType of productTypeValues" [value]="productType">{{ productType }}</option>
+          </select>
+          <div *ngIf="editForm.get('type')!.invalid && (editForm.get('type')!.dirty || editForm.get('type')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('type')?.errors?.required">This field is required.</small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+          <div *ngIf="editForm.get('description')!.invalid && (editForm.get('description')!.dirty || editForm.get('description')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('description')?.errors?.required">This field is required.</small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_quatity">Quatity</label>
+          <input type="number" class="form-control" name="quatity" id="field_quatity" data-cy="quatity" formControlName="quatity" />
+          <div *ngIf="editForm.get('quatity')!.invalid && (editForm.get('quatity')!.dirty || editForm.get('quatity')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('quatity')?.errors?.required">This field is required.</small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('quatity')?.errors?.number">This field should be a number.</small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_priceUnit">Price Unit</label>
+          <input type="number" class="form-control" name="priceUnit" id="field_priceUnit" data-cy="priceUnit" formControlName="priceUnit" />
+          <div *ngIf="editForm.get('priceUnit')!.invalid && (editForm.get('priceUnit')!.dirty || editForm.get('priceUnit')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('priceUnit')?.errors?.required">This field is required.</small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('priceUnit')?.errors?.number"
+              >This field should be a number.</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_priceExtended">Price Extended</label>
+          <input
+            type="number"
+            class="form-control"
+            name="priceExtended"
+            id="field_priceExtended"
+            data-cy="priceExtended"
+            formControlName="priceExtended"
+          />
+          <div
+            *ngIf="
+              editForm.get('priceExtended')!.invalid && (editForm.get('priceExtended')!.dirty || editForm.get('priceExtended')!.touched)
+            "
+          >
+            <small class="form-text text-danger" *ngIf="editForm.get('priceExtended')?.errors?.required">This field is required.</small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('priceExtended')?.errors?.number"
+              >This field should be a number.</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_disRate">Dis Rate</label>
+          <input type="number" class="form-control" name="disRate" id="field_disRate" data-cy="disRate" formControlName="disRate" />
+          <div *ngIf="editForm.get('disRate')!.invalid && (editForm.get('disRate')!.dirty || editForm.get('disRate')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('disRate')?.errors?.required">This field is required.</small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('disRate')?.errors?.number">This field should be a number.</small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_disAmount">Dis Amount</label>
+          <input type="number" class="form-control" name="disAmount" id="field_disAmount" data-cy="disAmount" formControlName="disAmount" />
+          <div *ngIf="editForm.get('disAmount')!.invalid && (editForm.get('disAmount')!.dirty || editForm.get('disAmount')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('disAmount')?.errors?.required">This field is required.</small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('disAmount')?.errors?.number"
+              >This field should be a number.</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_finalPrice">Final Price</label>
+          <input
+            type="number"
+            class="form-control"
+            name="finalPrice"
+            id="field_finalPrice"
+            data-cy="finalPrice"
+            formControlName="finalPrice"
+          />
+          <div *ngIf="editForm.get('finalPrice')!.invalid && (editForm.get('finalPrice')!.dirty || editForm.get('finalPrice')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('finalPrice')?.errors?.required">This field is required.</small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('finalPrice')?.errors?.number"
+              >This field should be a number.</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_vatRate">Vat Rate</label>
+          <input type="number" class="form-control" name="vatRate" id="field_vatRate" data-cy="vatRate" formControlName="vatRate" />
+          <div *ngIf="editForm.get('vatRate')!.invalid && (editForm.get('vatRate')!.dirty || editForm.get('vatRate')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('vatRate')?.errors?.required">This field is required.</small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('vatRate')?.errors?.number">This field should be a number.</small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_vatAmount">Vat Amount</label>
+          <input type="number" class="form-control" name="vatAmount" id="field_vatAmount" data-cy="vatAmount" formControlName="vatAmount" />
+          <div *ngIf="editForm.get('vatAmount')!.invalid && (editForm.get('vatAmount')!.dirty || editForm.get('vatAmount')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('vatAmount')?.errors?.required">This field is required.</small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('vatAmount')?.errors?.number"
+              >This field should be a number.</small
+            >
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_total">Total</label>
+          <input type="number" class="form-control" name="total" id="field_total" data-cy="total" formControlName="total" />
+          <div *ngIf="editForm.get('total')!.invalid && (editForm.get('total')!.dirty || editForm.get('total')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('total')?.errors?.required">This field is required.</small>
+            <small class="form-text text-danger" [hidden]="!editForm.get('total')?.errors?.number">This field should be a number.</small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_invoice">Invoice</label>
+          <select
+            class="form-control"
+            id="field_invoice"
+            data-cy="invoice"
+            name="invoice"
+            formControlName="invoice"
+            [compareWith]="compareInvoice"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="invoiceOption" *ngFor="let invoiceOption of invoicesSharedCollection">{{ invoiceOption.id }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

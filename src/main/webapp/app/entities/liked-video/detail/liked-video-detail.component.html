@@ -1,0 +1,44 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="likedVideo">
+      <h2 data-cy="likedVideoDetailsHeading"><span>Liked Video</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ likedVideo.id }}</span>
+        </dd>
+        <dt><span>Video Id</span></dt>
+        <dd>
+          <span>{{ likedVideo.videoId }}</span>
+        </dd>
+        <dt><span>Person Id</span></dt>
+        <dd>
+          <span>{{ likedVideo.personId }}</span>
+        </dd>
+        <dt><span>Coach Id</span></dt>
+        <dd>
+          <span>{{ likedVideo.coachId }}</span>
+        </dd>
+        <dt><span>Created</span></dt>
+        <dd>
+          <span>{{ likedVideo.created | formatMediumDatetime }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/liked-video', likedVideo.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

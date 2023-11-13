@@ -1,0 +1,72 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="apsAccount">
+      <h2 data-cy="apsAccountDetailsHeading"><span>Aps Account</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ apsAccount.id }}</span>
+        </dd>
+        <dt><span>Name</span></dt>
+        <dd>
+          <span>{{ apsAccount.name }}</span>
+        </dd>
+        <dt><span>Username</span></dt>
+        <dd>
+          <span>{{ apsAccount.username }}</span>
+        </dd>
+        <dt><span>Verified</span></dt>
+        <dd>
+          <span>{{ apsAccount.verified }}</span>
+        </dd>
+        <dt><span>Language</span></dt>
+        <dd>
+          <span>{{ apsAccount.language }}</span>
+        </dd>
+        <dt><span>Email</span></dt>
+        <dd>
+          <span>{{ apsAccount.email }}</span>
+        </dd>
+        <dt><span>Email Verified</span></dt>
+        <dd>
+          <span>{{ apsAccount.emailVerified }}</span>
+        </dd>
+        <dt><span>License</span></dt>
+        <dd>
+          <span>{{ apsAccount.license }}</span>
+        </dd>
+        <dt><span>Active</span></dt>
+        <dd>
+          <span>{{ apsAccount.active }}</span>
+        </dd>
+        <dt><span>Password</span></dt>
+        <dd>
+          <span>{{ apsAccount.password }}</span>
+        </dd>
+        <dt><span>Created</span></dt>
+        <dd>
+          <span>{{ apsAccount.created | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Updated</span></dt>
+        <dd>
+          <span>{{ apsAccount.updated | formatMediumDatetime }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/aps-account', apsAccount.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

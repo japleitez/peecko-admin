@@ -1,0 +1,66 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-code-translation-heading" data-cy="CodeTranslationCreateUpdateHeading">Create or edit a Code Translation</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_code">Code</label>
+          <input type="text" class="form-control" name="code" id="field_code" data-cy="code" formControlName="code" />
+          <div *ngIf="editForm.get('code')!.invalid && (editForm.get('code')!.dirty || editForm.get('code')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('code')?.errors?.required">This field is required.</small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_lang">Lang</label>
+          <select class="form-control" name="lang" formControlName="lang" id="field_lang" data-cy="lang">
+            <option [ngValue]="null"></option>
+            <option *ngFor="let language of languageValues" [value]="language">{{ language }}</option>
+          </select>
+          <div *ngIf="editForm.get('lang')!.invalid && (editForm.get('lang')!.dirty || editForm.get('lang')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('lang')?.errors?.required">This field is required.</small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_translation">Translation</label>
+          <input
+            type="text"
+            class="form-control"
+            name="translation"
+            id="field_translation"
+            data-cy="translation"
+            formControlName="translation"
+          />
+          <div *ngIf="editForm.get('translation')!.invalid && (editForm.get('translation')!.dirty || editForm.get('translation')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('translation')?.errors?.required">This field is required.</small>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

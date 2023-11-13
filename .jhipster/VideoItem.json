@@ -1,0 +1,32 @@
+{
+  "applications": ["admin"],
+  "changelogDate": "20231113212110",
+  "entityTableName": "video_item",
+  "fields": [
+    {
+      "fieldName": "previous",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "code",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "next",
+      "fieldType": "String"
+    }
+  ],
+  "name": "VideoItem",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "playlist",
+      "otherEntityRelationshipName": "videoItem",
+      "relationshipName": "playlist",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

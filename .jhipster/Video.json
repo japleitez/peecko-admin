@@ -1,0 +1,93 @@
+{
+  "applications": ["admin"],
+  "changelogDate": "20231113211610",
+  "entityTableName": "video",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "title",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "duration",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "language",
+      "fieldType": "Language",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "EN,DE,FR,ES"
+    },
+    {
+      "fieldName": "player",
+      "fieldType": "Player",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "PEECKO,YOUTUBE"
+    },
+    {
+      "fieldName": "thumbnail",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "url",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "audience",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "intensity",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "tags",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "filename",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "created",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "released",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "archived",
+      "fieldType": "Instant"
+    }
+  ],
+  "name": "Video",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "videoCategory",
+      "otherEntityRelationshipName": "video",
+      "relationshipName": "videoCategory",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "coach",
+      "otherEntityRelationshipName": "video",
+      "relationshipName": "coach",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

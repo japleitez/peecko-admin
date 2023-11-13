@@ -1,0 +1,81 @@
+{
+  "applications": ["admin"],
+  "changelogDate": "20231113210510",
+  "entityTableName": "aps_account",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "username",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "verified",
+      "fieldType": "YesNo",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "Y,N"
+    },
+    {
+      "fieldName": "language",
+      "fieldType": "Language",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "EN,DE,FR,ES"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "emailVerified",
+      "fieldType": "YesNo",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "Y,N"
+    },
+    {
+      "fieldName": "license",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "active",
+      "fieldType": "YesNo",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "Y,N"
+    },
+    {
+      "fieldName": "password",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "created",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updated",
+      "fieldType": "Instant"
+    }
+  ],
+  "name": "ApsAccount",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "apsDevice",
+      "otherEntityRelationshipName": "apsAccount",
+      "relationshipName": "apsDevice",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "playlist",
+      "otherEntityRelationshipName": "apsAccount",
+      "relationshipName": "playlist",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

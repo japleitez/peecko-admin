@@ -1,0 +1,47 @@
+{
+  "applications": ["admin"],
+  "changelogDate": "20231113212010",
+  "entityTableName": "playlist",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "counter",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "created",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "updated",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "Playlist",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "videoItem",
+      "otherEntityRelationshipName": "playlist",
+      "relationshipName": "videoItem",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "apsAccount",
+      "otherEntityRelationshipName": "playlist",
+      "relationshipName": "apsAccount",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

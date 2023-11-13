@@ -1,0 +1,36 @@
+{
+  "applications": ["admin"],
+  "changelogDate": "20231113210610",
+  "entityTableName": "secured_request",
+  "fields": [
+    {
+      "fieldName": "requestId",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "pinCode",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "created",
+      "fieldType": "Instant",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "expires",
+      "fieldType": "Instant"
+    }
+  ],
+  "name": "SecuredRequest",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

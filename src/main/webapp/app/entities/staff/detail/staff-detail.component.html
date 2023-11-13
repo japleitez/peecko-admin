@@ -1,0 +1,38 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="staff">
+      <h2 data-cy="staffDetailsHeading"><span>Staff</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ staff.id }}</span>
+        </dd>
+        <dt><span>Staff Id</span></dt>
+        <dd>
+          <span>{{ staff.staffId }}</span>
+        </dd>
+        <dt><span>Agency</span></dt>
+        <dd>
+          <div *ngIf="staff.agency">
+            <a [routerLink]="['/agency', staff.agency.id, 'view']">{{ staff.agency.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/staff', staff.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,187 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-video-heading" data-cy="VideoCreateUpdateHeading">Create or edit a Video</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_code">Code</label>
+          <input type="text" class="form-control" name="code" id="field_code" data-cy="code" formControlName="code" />
+          <div *ngIf="editForm.get('code')!.invalid && (editForm.get('code')!.dirty || editForm.get('code')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('code')?.errors?.required">This field is required.</small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_title">Title</label>
+          <input type="text" class="form-control" name="title" id="field_title" data-cy="title" formControlName="title" />
+          <div *ngIf="editForm.get('title')!.invalid && (editForm.get('title')!.dirty || editForm.get('title')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('title')?.errors?.required">This field is required.</small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_duration">Duration</label>
+          <input type="number" class="form-control" name="duration" id="field_duration" data-cy="duration" formControlName="duration" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_language">Language</label>
+          <select class="form-control" name="language" formControlName="language" id="field_language" data-cy="language">
+            <option [ngValue]="null"></option>
+            <option *ngFor="let language of languageValues" [value]="language">{{ language }}</option>
+          </select>
+          <div *ngIf="editForm.get('language')!.invalid && (editForm.get('language')!.dirty || editForm.get('language')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('language')?.errors?.required">This field is required.</small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_player">Player</label>
+          <select class="form-control" name="player" formControlName="player" id="field_player" data-cy="player">
+            <option [ngValue]="null"></option>
+            <option *ngFor="let player of playerValues" [value]="player">{{ player }}</option>
+          </select>
+          <div *ngIf="editForm.get('player')!.invalid && (editForm.get('player')!.dirty || editForm.get('player')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('player')?.errors?.required">This field is required.</small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_thumbnail">Thumbnail</label>
+          <input type="text" class="form-control" name="thumbnail" id="field_thumbnail" data-cy="thumbnail" formControlName="thumbnail" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_url">Url</label>
+          <input type="text" class="form-control" name="url" id="field_url" data-cy="url" formControlName="url" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_audience">Audience</label>
+          <input type="text" class="form-control" name="audience" id="field_audience" data-cy="audience" formControlName="audience" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_intensity">Intensity</label>
+          <input type="text" class="form-control" name="intensity" id="field_intensity" data-cy="intensity" formControlName="intensity" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_tags">Tags</label>
+          <input type="text" class="form-control" name="tags" id="field_tags" data-cy="tags" formControlName="tags" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_filename">Filename</label>
+          <input type="text" class="form-control" name="filename" id="field_filename" data-cy="filename" formControlName="filename" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_description">Description</label>
+          <input
+            type="text"
+            class="form-control"
+            name="description"
+            id="field_description"
+            data-cy="description"
+            formControlName="description"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_created">Created</label>
+          <div class="d-flex">
+            <input
+              id="field_created"
+              data-cy="created"
+              type="datetime-local"
+              class="form-control"
+              name="created"
+              formControlName="created"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_released">Released</label>
+          <div class="d-flex">
+            <input
+              id="field_released"
+              data-cy="released"
+              type="datetime-local"
+              class="form-control"
+              name="released"
+              formControlName="released"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_archived">Archived</label>
+          <div class="d-flex">
+            <input
+              id="field_archived"
+              data-cy="archived"
+              type="datetime-local"
+              class="form-control"
+              name="archived"
+              formControlName="archived"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_videoCategory">Video Category</label>
+          <select
+            class="form-control"
+            id="field_videoCategory"
+            data-cy="videoCategory"
+            name="videoCategory"
+            formControlName="videoCategory"
+            [compareWith]="compareVideoCategory"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="videoCategoryOption" *ngFor="let videoCategoryOption of videoCategoriesSharedCollection">
+              {{ videoCategoryOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_coach">Coach</label>
+          <select class="form-control" id="field_coach" data-cy="coach" name="coach" formControlName="coach" [compareWith]="compareCoach">
+            <option [ngValue]="null"></option>
+            <option [ngValue]="coachOption" *ngFor="let coachOption of coachesSharedCollection">{{ coachOption.id }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

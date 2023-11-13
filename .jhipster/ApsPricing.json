@@ -1,0 +1,40 @@
+{
+  "applications": ["admin"],
+  "changelogDate": "20231113211510",
+  "entityTableName": "aps_pricing",
+  "fields": [
+    {
+      "fieldName": "customerId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "index",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "minQuantity",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "unitPrice",
+      "fieldType": "Double",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "ApsPricing",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "agency",
+      "otherEntityRelationshipName": "apsPricing",
+      "relationshipName": "agency",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

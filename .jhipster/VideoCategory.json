@@ -1,0 +1,42 @@
+{
+  "applications": ["admin"],
+  "changelogDate": "20231113211710",
+  "entityTableName": "video_category",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "title",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "created",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "released",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "archived",
+      "fieldType": "Instant"
+    }
+  ],
+  "name": "VideoCategory",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "video",
+      "otherEntityRelationshipName": "videoCategory",
+      "relationshipName": "video",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

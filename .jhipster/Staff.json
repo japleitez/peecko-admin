@@ -1,0 +1,25 @@
+{
+  "applications": ["admin"],
+  "changelogDate": "20231113210910",
+  "entityTableName": "staff",
+  "fields": [
+    {
+      "fieldName": "staffId",
+      "fieldType": "Long",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "Staff",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "agency",
+      "otherEntityRelationshipName": "staff",
+      "relationshipName": "agency",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}

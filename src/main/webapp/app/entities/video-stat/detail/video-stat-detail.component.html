@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="videoStat">
+      <h2 data-cy="videoStatDetailsHeading"><span>Video Stat</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ videoStat.id }}</span>
+        </dd>
+        <dt><span>Video Id</span></dt>
+        <dd>
+          <span>{{ videoStat.videoId }}</span>
+        </dd>
+        <dt><span>Category Id</span></dt>
+        <dd>
+          <span>{{ videoStat.categoryId }}</span>
+        </dd>
+        <dt><span>Coach Id</span></dt>
+        <dd>
+          <span>{{ videoStat.coachId }}</span>
+        </dd>
+        <dt><span>Liked</span></dt>
+        <dd>
+          <span>{{ videoStat.liked }}</span>
+        </dd>
+        <dt><span>Viewed</span></dt>
+        <dd>
+          <span>{{ videoStat.viewed }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/video-stat', videoStat.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

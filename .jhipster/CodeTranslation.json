@@ -1,0 +1,28 @@
+{
+  "applications": ["admin"],
+  "changelogDate": "20231113211910",
+  "entityTableName": "code_translation",
+  "fields": [
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "lang",
+      "fieldType": "Language",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "EN,DE,FR,ES"
+    },
+    {
+      "fieldName": "translation",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "CodeTranslation",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no",
+  "service": "serviceClass"
+}
