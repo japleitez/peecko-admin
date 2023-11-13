@@ -24,8 +24,7 @@ In the project root, JHipster generates configuration files for tools like git, 
 
 Before you can build this project, you must install and configure the following dependencies on your machine:
 
-
-0. [Node.js][]: We use nvm to manage different versions of node.js
+We use Node Version Manager to install and use different versions of node.js
    
 1. [Node.js][]: We use Node 18.18.2 to run a development web server and build the project.
    Depending on your system, you can install Node either from source or as a pre-packaged bundle.
