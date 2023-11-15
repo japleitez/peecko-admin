@@ -43,6 +43,28 @@ export class CustomerComponent implements OnInit {
   totalItems = 0;
   page = 1;
 
+  list = {
+    id: true,
+    code: true,
+    name: true,
+    country: false,
+    membership: true,
+    state: true,
+    closeReason: false,
+    emailDomains: false,
+    vatId: false,
+    bank: false,
+    iban: false,
+    logo: false,
+    notes: false,
+    created: false,
+    updated: true,
+    trialed: false,
+    declined: false,
+    activated: true,
+    closed: true,
+  };
+
   constructor(
     protected customerService: CustomerService,
     protected activatedRoute: ActivatedRoute,

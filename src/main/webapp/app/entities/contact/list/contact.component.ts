@@ -11,11 +11,11 @@ import { ItemCountComponent } from 'app/shared/pagination';
 import { FormsModule } from '@angular/forms';
 
 import { ITEMS_PER_PAGE, PAGE_HEADER, TOTAL_COUNT_RESPONSE_HEADER } from 'app/config/pagination.constants';
-import {ASC, DESC, SORT, ITEM_DELETED_EVENT, DEFAULT_SORT_DATA, CUSTOMER} from 'app/config/navigation.constants';
+import { ASC, DESC, SORT, ITEM_DELETED_EVENT, DEFAULT_SORT_DATA, CUSTOMER } from 'app/config/navigation.constants';
 import { IContact } from '../contact.model';
 import { EntityArrayResponseType, ContactService } from '../service/contact.service';
 import { ContactDeleteDialogComponent } from '../delete/contact-delete-dialog.component';
-import { EntityCardsModule } from "../../../shared/entity-cards/entity-cards.module";
+import { EntityCardsModule } from '../../../shared/entity-cards/entity-cards.module';
 
 @Component({
   standalone: true,
@@ -155,5 +155,9 @@ export class ContactComponent implements OnInit {
     } else {
       return [predicate + ',' + ascendingQueryParam];
     }
+  }
+
+  previousState(): void {
+    window.history.back();
   }
 }

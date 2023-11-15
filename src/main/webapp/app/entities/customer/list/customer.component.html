@@ -32,115 +32,115 @@
     <table class="table table-striped" aria-describedby="page-heading">
       <thead>
         <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
-          <th scope="col" jhiSortBy="id">
+          <th scope="col" jhiSortBy="id" *ngIf="list.id">
             <div class="d-flex">
               <span>ID</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="code">
+          <th scope="col" jhiSortBy="code" *ngIf="list.code">
             <div class="d-flex">
               <span>Code</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="name">
+          <th scope="col" jhiSortBy="name" *ngIf="list.name">
             <div class="d-flex">
               <span>Name</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="country">
+          <th scope="col" jhiSortBy="country" *ngIf="list.country">
             <div class="d-flex">
               <span>Country</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="membership">
+          <th scope="col" jhiSortBy="membership" *ngIf="list.membership">
             <div class="d-flex">
               <span>Membership</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="state">
+          <th scope="col" jhiSortBy="state" *ngIf="list.state">
             <div class="d-flex">
               <span>State</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="closeReason">
+          <th scope="col" jhiSortBy="closeReason" *ngIf="list.closeReason">
             <div class="d-flex">
               <span>Close Reason</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="emailDomains">
+          <th scope="col" jhiSortBy="emailDomains" *ngIf="list.emailDomains">
             <div class="d-flex">
               <span>Email Domains</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="vatId">
+          <th scope="col" jhiSortBy="vatId" *ngIf="list.vatId">
             <div class="d-flex">
               <span>Vat Id</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="bank">
+          <th scope="col" jhiSortBy="bank" *ngIf="list.bank">
             <div class="d-flex">
               <span>Bank</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="iban">
+          <th scope="col" jhiSortBy="iban" *ngIf="list.iban">
             <div class="d-flex">
               <span>Iban</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="logo">
+          <th scope="col" jhiSortBy="logo" *ngIf="list.logo">
             <div class="d-flex">
               <span>Logo</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="notes">
+          <th scope="col" jhiSortBy="notes" *ngIf="list.notes">
             <div class="d-flex">
               <span>Notes</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="created">
+          <th scope="col" jhiSortBy="created" *ngIf="list.created">
             <div class="d-flex">
               <span>Created</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="updated">
+          <th scope="col" jhiSortBy="updated" *ngIf="list.updated">
             <div class="d-flex">
               <span>Updated</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="trialed">
+          <th scope="col" jhiSortBy="trialed" *ngIf="list.trialed">
             <div class="d-flex">
               <span>Trialed</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="declined">
+          <th scope="col" jhiSortBy="declined" *ngIf="list.declined">
             <div class="d-flex">
               <span>Declined</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="activated">
+          <th scope="col" jhiSortBy="activated" *ngIf="list.activated">
             <div class="d-flex">
               <span>Activated</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
             </div>
           </th>
-          <th scope="col" jhiSortBy="closed">
+          <th scope="col" jhiSortBy="closed" *ngIf="list.closed">
             <div class="d-flex">
               <span>Closed</span>
               <fa-icon class="p-1" icon="sort"></fa-icon>
@@ -157,27 +157,27 @@
       </thead>
       <tbody>
         <tr *ngFor="let customer of customers; trackBy: trackId" data-cy="entityTable">
-          <td>
+          <td *ngIf="list.id">
             <a [routerLink]="['/customer', customer.id, 'view']">{{ customer.id }}</a>
           </td>
-          <td>{{ customer.code }}</td>
-          <td>{{ customer.name }}</td>
-          <td>{{ customer.country }}</td>
-          <td>{{ customer.membership }}</td>
-          <td>{{ customer.state }}</td>
-          <td>{{ customer.closeReason }}</td>
-          <td>{{ customer.emailDomains }}</td>
-          <td>{{ customer.vatId }}</td>
-          <td>{{ customer.bank }}</td>
-          <td>{{ customer.iban }}</td>
-          <td>{{ customer.logo }}</td>
-          <td>{{ customer.notes }}</td>
-          <td>{{ customer.created | formatMediumDatetime }}</td>
-          <td>{{ customer.updated | formatMediumDatetime }}</td>
-          <td>{{ customer.trialed | formatMediumDatetime }}</td>
-          <td>{{ customer.declined | formatMediumDatetime }}</td>
-          <td>{{ customer.activated | formatMediumDatetime }}</td>
-          <td>{{ customer.closed | formatMediumDatetime }}</td>
+          <td *ngIf="list.code">{{ customer.code }}</td>
+          <td *ngIf="list.name">{{ customer.name }}</td>
+          <td *ngIf="list.country">{{ customer.country }}</td>
+          <td *ngIf="list.membership">{{ customer.membership }}</td>
+          <td *ngIf="list.state">{{ customer.state }}</td>
+          <td *ngIf="list.closeReason">{{ customer.closeReason }}</td>
+          <td *ngIf="list.emailDomains">{{ customer.emailDomains }}</td>
+          <td *ngIf="list.vatId">{{ customer.vatId }}</td>
+          <td *ngIf="list.bank">{{ customer.bank }}</td>
+          <td *ngIf="list.iban">{{ customer.iban }}</td>
+          <td *ngIf="list.logo">{{ customer.logo }}</td>
+          <td *ngIf="list.notes">{{ customer.notes }}</td>
+          <td *ngIf="list.created">{{ customer.created | formatMediumDatetime }}</td>
+          <td *ngIf="list.updated">{{ customer.updated | formatMediumDatetime }}</td>
+          <td *ngIf="list.trialed">{{ customer.trialed | formatMediumDatetime }}</td>
+          <td *ngIf="list.declined">{{ customer.declined | formatMediumDatetime }}</td>
+          <td *ngIf="list.activated">{{ customer.activated | formatMediumDatetime }}</td>
+          <td *ngIf="list.closed">{{ customer.closed | formatMediumDatetime }}</td>
           <td>
             <div *ngIf="customer.agency">
               <a [routerLink]="['/agency', customer.agency.id, 'view']">{{ customer.agency.id }}</a>
