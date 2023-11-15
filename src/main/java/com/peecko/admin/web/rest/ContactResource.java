@@ -138,15 +138,22 @@ public class ContactResource {
     }
 
     /**
-     * {@code GET  /contacts} : get all the contacts.
+     * {@code GET  /contacts} : get the contacts for the specified customer or all the contacts if no customer is passed.
      *
      * @param pageable the pagination information.
+     * @param customerId the id of the customer to filter by.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of contacts in body.
      */
     @GetMapping("")
-    public ResponseEntity<List<Contact>> getAllContacts(@org.springdoc.core.annotations.ParameterObject Pageable pageable) {
+    public ResponseEntity<List<Contact>> getAllContacts(@org.springdoc.core.annotations.ParameterObject Pageable pageable,
+                                                        @RequestParam(name = "customer", required = false) Long customerId) {
         log.debug("REST request to get a page of Contacts");
-        Page<Contact> page = contactService.findAll(pageable);
+        Page<Contact> page;
+        if (Objects.isNull(customerId)) {
+            page = contactService.findAll(pageable);
+        } else {
+            page = contactService.findByCustomer(customerId, pageable);
+        }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
