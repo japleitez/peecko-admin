@@ -15,6 +15,7 @@ import {ASC, DESC, SORT, ITEM_DELETED_EVENT, DEFAULT_SORT_DATA, CUSTOMER} from '
 import { IContact } from '../contact.model';
 import { EntityArrayResponseType, ContactService } from '../service/contact.service';
 import { ContactDeleteDialogComponent } from '../delete/contact-delete-dialog.component';
+import { EntityCardsModule } from "../../../shared/entity-cards/entity-cards.module";
 
 @Component({
   standalone: true,
@@ -30,6 +31,7 @@ import { ContactDeleteDialogComponent } from '../delete/contact-delete-dialog.co
     FormatMediumDatetimePipe,
     FormatMediumDatePipe,
     ItemCountComponent,
+    EntityCardsModule,
   ],
 })
 export class ContactComponent implements OnInit {
@@ -42,7 +44,7 @@ export class ContactComponent implements OnInit {
   itemsPerPage = ITEMS_PER_PAGE;
   totalItems = 0;
   page = 1;
-  customerId: string | null = "0";
+  customerId: string | null = null;
 
   constructor(
     protected contactService: ContactService,
