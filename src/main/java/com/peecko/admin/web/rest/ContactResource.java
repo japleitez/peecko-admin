@@ -148,7 +148,7 @@ public class ContactResource {
     public ResponseEntity<List<Contact>> getAllContacts(@org.springdoc.core.annotations.ParameterObject Pageable pageable,
                                                         @RequestParam(name = "customer", required = false) Long customerId) {
         log.debug("REST request to get a page of Contacts");
-        Page<Contact> page = null;
+        Page<Contact> page;
         if (Objects.isNull(customerId)) {
             page = contactService.findAll(pageable);
         } else {
