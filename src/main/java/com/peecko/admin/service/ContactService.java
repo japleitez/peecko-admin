@@ -1,6 +1,7 @@
 package com.peecko.admin.service;
 
 import com.peecko.admin.domain.Contact;
+import com.peecko.admin.domain.Customer;
 import com.peecko.admin.repository.ContactRepository;
 import java.util.Optional;
 import org.slf4j.Logger;
@@ -111,6 +112,20 @@ public class ContactService {
     public Page<Contact> findAll(Pageable pageable) {
         log.debug("Request to get all Contacts");
         return contactRepository.findAll(pageable);
+    }
+
+    /**
+     * Get the contacts by customer.
+     *
+     * @param customerId the customer to filter.
+     * @param pageable the pagination information.
+     * @return the list of entities.
+     */
+    public Page<Contact> findByCustomer(Long customerId, Pageable pageable) {
+        log.debug("Request to find Contacts by Customer");
+        Customer customer = new Customer();
+        customer.setId(customerId);
+        return contactRepository.findByCustomer(customer, pageable);
     }
 
     /**
