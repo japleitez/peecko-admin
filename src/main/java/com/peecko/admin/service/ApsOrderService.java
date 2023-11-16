@@ -1,6 +1,7 @@
 package com.peecko.admin.service;
 
 import com.peecko.admin.domain.ApsOrder;
+import com.peecko.admin.domain.ApsPlan;
 import com.peecko.admin.repository.ApsOrderRepository;
 import java.util.Optional;
 import org.slf4j.Logger;
@@ -96,6 +97,20 @@ public class ApsOrderService {
     public Page<ApsOrder> findAll(Pageable pageable) {
         log.debug("Request to get all ApsOrders");
         return apsOrderRepository.findAll(pageable);
+    }
+
+    /**
+     * Get the apsOrders by apsPlan.
+     *
+     * @param apsPlanId the ApsPlan ID to filter by.
+     * @param pageable the pagination information.
+     * @return the list of entities.
+     */
+    public Page<ApsOrder> findByApsPlan(Long apsPlanId, Pageable pageable) {
+        log.debug("Request to get ApsOrders by ApsPlan");
+        ApsPlan apsPlan = new ApsPlan();
+        apsPlan.setId(apsPlanId);
+        return apsOrderRepository.findByApsPlan(apsPlan, pageable);
     }
 
     /**

@@ -140,13 +140,20 @@ public class ApsOrderResource {
     /**
      * {@code GET  /aps-orders} : get all the apsOrders.
      *
+     * @param apsPlanId the ApsPlan ID to filter by.
      * @param pageable the pagination information.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of apsOrders in body.
      */
     @GetMapping("")
-    public ResponseEntity<List<ApsOrder>> getAllApsOrders(@org.springdoc.core.annotations.ParameterObject Pageable pageable) {
+    public ResponseEntity<List<ApsOrder>> getAllApsOrders(@org.springdoc.core.annotations.ParameterObject Pageable pageable,
+                                                          @RequestParam(name = "apsPlanId", required = false) Long apsPlanId) {
         log.debug("REST request to get a page of ApsOrders");
-        Page<ApsOrder> page = apsOrderService.findAll(pageable);
+        Page<ApsOrder> page;
+        if (Objects.isNull(apsPlanId)) {
+            page = apsOrderService.findAll(pageable);
+        } else {
+            page = apsOrderService.findByApsPlan(apsPlanId, pageable);
+        }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
