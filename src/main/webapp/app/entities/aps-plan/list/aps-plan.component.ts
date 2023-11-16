@@ -11,10 +11,11 @@ import { ItemCountComponent } from 'app/shared/pagination';
 import { FormsModule } from '@angular/forms';
 
 import { ITEMS_PER_PAGE, PAGE_HEADER, TOTAL_COUNT_RESPONSE_HEADER } from 'app/config/pagination.constants';
-import { ASC, DESC, SORT, ITEM_DELETED_EVENT, DEFAULT_SORT_DATA } from 'app/config/navigation.constants';
+import { ASC, DESC, SORT, ITEM_DELETED_EVENT, DEFAULT_SORT_DATA, CUSTOMER } from 'app/config/navigation.constants';
 import { IApsPlan } from '../aps-plan.model';
 import { EntityArrayResponseType, ApsPlanService } from '../service/aps-plan.service';
 import { ApsPlanDeleteDialogComponent } from '../delete/aps-plan-delete-dialog.component';
+import {} from '../../../shared/entity-cards/entity-cards.module';
 
 @Component({
   standalone: true,
@@ -30,6 +31,7 @@ import { ApsPlanDeleteDialogComponent } from '../delete/aps-plan-delete-dialog.c
     FormatMediumDatetimePipe,
     FormatMediumDatePipe,
     ItemCountComponent,
+    EntityCardsModule,
   ],
 })
 export class ApsPlanComponent implements OnInit {
@@ -42,6 +44,7 @@ export class ApsPlanComponent implements OnInit {
   itemsPerPage = ITEMS_PER_PAGE;
   totalItems = 0;
   page = 1;
+  customerId: string | null = null;
 
   constructor(
     protected apsPlanService: ApsPlanService,
@@ -101,6 +104,7 @@ export class ApsPlanComponent implements OnInit {
     const sort = (params.get(SORT) ?? data[DEFAULT_SORT_DATA]).split(',');
     this.predicate = sort[0];
     this.ascending = sort[1] === ASC;
+    this.customerId = params.get(CUSTOMER);
   }
 
   protected onResponseSuccess(response: EntityArrayResponseType): void {
@@ -125,6 +129,9 @@ export class ApsPlanComponent implements OnInit {
       size: this.itemsPerPage,
       sort: this.getSortQueryParam(predicate, ascending),
     };
+    if (this.customerId) {
+      queryObject.customer = this.customerId;
+    }
     return this.apsPlanService.query(queryObject).pipe(tap(() => (this.isLoading = false)));
   }
 
@@ -148,5 +155,9 @@ export class ApsPlanComponent implements OnInit {
     } else {
       return [predicate + ',' + ascendingQueryParam];
     }
+  }
+
+  previousState(): void {
+    window.history.back();
   }
 }

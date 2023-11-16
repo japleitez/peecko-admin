@@ -117,10 +117,11 @@ public class ContactService {
     /**
      * Get the contacts by customer.
      *
-     * @param customerId the customer to filter.
+     * @param customerId the customer to filter by.
      * @param pageable the pagination information.
      * @return the list of entities.
      */
+    @Transactional(readOnly = true)
     public Page<Contact> findByCustomer(Long customerId, Pageable pageable) {
         log.debug("Request to find Contacts by Customer");
         Customer customer = new Customer();

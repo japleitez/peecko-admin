@@ -1,6 +1,7 @@
 package com.peecko.admin.service;
 
 import com.peecko.admin.domain.ApsPlan;
+import com.peecko.admin.domain.Customer;
 import com.peecko.admin.repository.ApsPlanRepository;
 import java.util.Optional;
 import org.slf4j.Logger;
@@ -111,6 +112,21 @@ public class ApsPlanService {
     public Page<ApsPlan> findAll(Pageable pageable) {
         log.debug("Request to get all ApsPlans");
         return apsPlanRepository.findAll(pageable);
+    }
+
+    /**
+     * Get the apsPlans by customer.
+     *
+     * @param customerId the customer to filter by.
+     * @param pageable the pagination information.
+     * @return the list of entities.
+     */
+    @Transactional(readOnly = true)
+    public Page<ApsPlan> findByCustomer(Long customerId, Pageable pageable) {
+        log.debug("Request to get ApsPlans by Customer");
+        Customer customer = new Customer();
+        customer.setId(customerId);
+        return apsPlanRepository.findByCustomer(customer, pageable);
     }
 
     /**

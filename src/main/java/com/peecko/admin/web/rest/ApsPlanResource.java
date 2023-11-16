@@ -141,12 +141,21 @@ public class ApsPlanResource {
      * {@code GET  /aps-plans} : get all the apsPlans.
      *
      * @param pageable the pagination information.
+     * @param customerId the customer ID to filter by.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of apsPlans in body.
      */
     @GetMapping("")
-    public ResponseEntity<List<ApsPlan>> getAllApsPlans(@org.springdoc.core.annotations.ParameterObject Pageable pageable) {
+    public ResponseEntity<List<ApsPlan>> getAllApsPlans(
+        @org.springdoc.core.annotations.ParameterObject Pageable pageable,
+        @RequestParam(name = "customer", required = false) Long customerId
+    ) {
         log.debug("REST request to get a page of ApsPlans");
-        Page<ApsPlan> page = apsPlanService.findAll(pageable);
+        Page<ApsPlan> page;
+        if (Objects.isNull(customerId)) {
+            page = apsPlanService.findAll(pageable);
+        } else {
+            page = apsPlanService.findByCustomer(customerId, pageable);
+        }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
