@@ -15,7 +15,7 @@ import { ASC, DESC, SORT, ITEM_DELETED_EVENT, DEFAULT_SORT_DATA, CUSTOMER } from
 import { IApsPlan } from '../aps-plan.model';
 import { EntityArrayResponseType, ApsPlanService } from '../service/aps-plan.service';
 import { ApsPlanDeleteDialogComponent } from '../delete/aps-plan-delete-dialog.component';
-import {} from '../../../shared/entity-cards/entity-cards.module';
+import { EntityCardsModule } from '../../../shared/entity-cards/entity-cards.module';
 
 @Component({
   standalone: true,
