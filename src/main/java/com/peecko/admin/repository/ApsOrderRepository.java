@@ -1,6 +1,9 @@
 package com.peecko.admin.repository;
 
 import com.peecko.admin.domain.ApsOrder;
+import com.peecko.admin.domain.ApsPlan;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
@@ -9,4 +12,6 @@ import org.springframework.stereotype.Repository;
  */
 @SuppressWarnings("unused")
 @Repository
-public interface ApsOrderRepository extends JpaRepository<ApsOrder, Long> {}
+public interface ApsOrderRepository extends JpaRepository<ApsOrder, Long> {
+    Page<ApsOrder> findByApsPlan(ApsPlan apsPlan, Pageable pageable);
+}

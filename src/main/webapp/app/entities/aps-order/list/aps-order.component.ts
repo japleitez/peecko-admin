@@ -11,7 +11,7 @@ import { ItemCountComponent } from 'app/shared/pagination';
 import { FormsModule } from '@angular/forms';
 
 import { ITEMS_PER_PAGE, PAGE_HEADER, TOTAL_COUNT_RESPONSE_HEADER } from 'app/config/pagination.constants';
-import { ASC, DESC, SORT, ITEM_DELETED_EVENT, DEFAULT_SORT_DATA } from 'app/config/navigation.constants';
+import {ASC, DESC, SORT, ITEM_DELETED_EVENT, DEFAULT_SORT_DATA, APS_PLAN_ID} from 'app/config/navigation.constants';
 import { IApsOrder } from '../aps-order.model';
 import { EntityArrayResponseType, ApsOrderService } from '../service/aps-order.service';
 import { ApsOrderDeleteDialogComponent } from '../delete/aps-order-delete-dialog.component';
@@ -42,6 +42,7 @@ export class ApsOrderComponent implements OnInit {
   itemsPerPage = ITEMS_PER_PAGE;
   totalItems = 0;
   page = 1;
+  apsPlanId: string | null = null;
 
   constructor(
     protected apsOrderService: ApsOrderService,
@@ -101,6 +102,7 @@ export class ApsOrderComponent implements OnInit {
     const sort = (params.get(SORT) ?? data[DEFAULT_SORT_DATA]).split(',');
     this.predicate = sort[0];
     this.ascending = sort[1] === ASC;
+    this.apsPlanId = params.get(APS_PLAN_ID);
   }
 
   protected onResponseSuccess(response: EntityArrayResponseType): void {
@@ -125,6 +127,9 @@ export class ApsOrderComponent implements OnInit {
       size: this.itemsPerPage,
       sort: this.getSortQueryParam(predicate, ascending),
     };
+    if (this.apsPlanId) {
+      queryObject.apsPlanId = this.apsPlanId;
+    }
     return this.apsOrderService.query(queryObject).pipe(tap(() => (this.isLoading = false)));
   }
 
@@ -149,4 +154,9 @@ export class ApsOrderComponent implements OnInit {
       return [predicate + ',' + ascendingQueryParam];
     }
   }
+
+  previousState(): void {
+    window.history.back();
+  }
+
 }
