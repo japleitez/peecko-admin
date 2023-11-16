@@ -111,6 +111,16 @@
       >
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Contacts</span>
       </button>
+
+      <button
+        type="button"
+        [routerLink]="['/aps-plan']"
+        [queryParams]="{ customer: customer.id }"
+        queryParamsHandling="merge"
+        class="btn btn-primary"
+      >
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>App. Plans</span>
+      </button>
     </div>
   </div>
 </div>

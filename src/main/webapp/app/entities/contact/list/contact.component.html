@@ -1,7 +1,9 @@
 <div>
   <h2 id="page-heading" data-cy="ContactHeading">
     <span>Contacts</span>
+
     <jhi-customer-card [customerId]="customerId"></jhi-customer-card>
+
     <div class="d-flex justify-content-end">
       <button class="btn btn-info" (click)="previousState()" data-cy="entityListBackButton" *ngIf="customerId">
         <fa-icon icon="arrow-left"></fa-icon>
