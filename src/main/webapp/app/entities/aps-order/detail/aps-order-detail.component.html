@@ -57,6 +57,16 @@
       <button type="button" [routerLink]="['/aps-order', apsOrder.id, 'edit']" class="btn btn-primary">
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
       </button>
+
+      <button
+        type="button"
+        [routerLink]="['/aps-membership']"
+        [queryParams]="{ apsOrderId: apsOrder.id }"
+        queryParamsHandling="merge"
+        class="btn btn-primary"
+      >
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Membership</span>
+      </button>
     </div>
   </div>
 </div>

@@ -1,6 +1,7 @@
 package com.peecko.admin.service;
 
 import com.peecko.admin.domain.ApsMembership;
+import com.peecko.admin.domain.ApsOrder;
 import com.peecko.admin.repository.ApsMembershipRepository;
 import java.util.Optional;
 import org.slf4j.Logger;
@@ -84,6 +85,20 @@ public class ApsMembershipService {
     public Page<ApsMembership> findAll(Pageable pageable) {
         log.debug("Request to get all ApsMemberships");
         return apsMembershipRepository.findAll(pageable);
+    }
+
+    /**
+     * Get the apsMemberships by ApsOrder.
+     *
+     * @param apsOrderId the ApsOrder ID to filter by.
+     * @param pageable the pagination information.
+     * @return the list of entities.
+     */
+    @Transactional(readOnly = true)
+    public Page<ApsMembership> findByApsOrder(Long apsOrderId, Pageable pageable) {
+        ApsOrder apsOrder = new ApsOrder();
+        apsOrder.setId(apsOrderId);
+        return apsMembershipRepository.findByApsOrder(apsOrder, pageable);
     }
 
     /**
