@@ -73,6 +73,16 @@
       <button type="button" [routerLink]="['/invoice', invoice.id, 'edit']" class="btn btn-primary">
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
       </button>
+
+      <button
+        type="button"
+        [routerLink]="['/invoice-item']"
+        [queryParams]="{ invoiceId: invoice.id }"
+        queryParamsHandling="merge"
+        class="btn btn-primary"
+      >
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Invoice Item</span>
+      </button>
     </div>
   </div>
 </div>

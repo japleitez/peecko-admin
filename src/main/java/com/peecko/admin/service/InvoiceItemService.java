@@ -1,5 +1,6 @@
 package com.peecko.admin.service;
 
+import com.peecko.admin.domain.Invoice;
 import com.peecko.admin.domain.InvoiceItem;
 import com.peecko.admin.repository.InvoiceItemRepository;
 import java.util.Optional;
@@ -108,6 +109,21 @@ public class InvoiceItemService {
     public Page<InvoiceItem> findAll(Pageable pageable) {
         log.debug("Request to get all InvoiceItems");
         return invoiceItemRepository.findAll(pageable);
+    }
+
+    /**
+     * Get the invoiceItems by Invoice.
+     *
+     * @param invoiceId the Invoice ID to filter by.
+     * @param pageable the pagination information.
+     * @return the list of entities.
+     */
+    @Transactional(readOnly = true)
+    public Page<InvoiceItem> findByInvoice(Long invoiceId, Pageable pageable) {
+        log.debug("Request to get InvoiceItems by Invoice");
+        Invoice invoice = new Invoice();
+        invoice.setId(invoiceId);
+        return invoiceItemRepository.findByInvoice(invoice, pageable);
     }
 
     /**
