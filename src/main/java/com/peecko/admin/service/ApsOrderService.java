@@ -106,6 +106,7 @@ public class ApsOrderService {
      * @param pageable the pagination information.
      * @return the list of entities.
      */
+    @Transactional(readOnly = true)
     public Page<ApsOrder> findByApsPlan(Long apsPlanId, Pageable pageable) {
         log.debug("Request to get ApsOrders by ApsPlan");
         ApsPlan apsPlan = new ApsPlan();

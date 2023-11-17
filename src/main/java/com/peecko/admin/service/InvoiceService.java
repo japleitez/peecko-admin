@@ -1,5 +1,6 @@
 package com.peecko.admin.service;
 
+import com.peecko.admin.domain.ApsOrder;
 import com.peecko.admin.domain.Invoice;
 import com.peecko.admin.repository.InvoiceRepository;
 import java.util.Optional;
@@ -108,6 +109,21 @@ public class InvoiceService {
     public Page<Invoice> findAll(Pageable pageable) {
         log.debug("Request to get all Invoices");
         return invoiceRepository.findAll(pageable);
+    }
+
+    /**
+     * Get the invoices by ApsOrder.
+     *
+     * @param apsOrderId the ApsOrder ID to filter by.
+     * @param pageable the pagination information.
+     * @return the list of entities.
+     */
+    @Transactional(readOnly = true)
+    public Page<Invoice> findByApsOrder(Long apsOrderId, Pageable pageable) {
+        log.debug("Request to get Invoices by ApsOrder");
+        ApsOrder apsOrder = new ApsOrder();
+        apsOrder.setId(apsOrderId);
+        return invoiceRepository.findByApsOrder(apsOrder, pageable);
     }
 
     /**
