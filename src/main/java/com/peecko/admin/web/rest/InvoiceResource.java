@@ -140,13 +140,22 @@ public class InvoiceResource {
     /**
      * {@code GET  /invoices} : get all the invoices.
      *
+     * @param apsOrderId the ApsOrder ID to filter by.
      * @param pageable the pagination information.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of invoices in body.
      */
     @GetMapping("")
-    public ResponseEntity<List<Invoice>> getAllInvoices(@org.springdoc.core.annotations.ParameterObject Pageable pageable) {
+    public ResponseEntity<List<Invoice>> getAllInvoices(
+        @org.springdoc.core.annotations.ParameterObject Pageable pageable,
+        @RequestParam(name = "apsOrderId", required = false) Long apsOrderId
+    ) {
         log.debug("REST request to get a page of Invoices");
-        Page<Invoice> page = invoiceService.findAll(pageable);
+        Page<Invoice> page;
+        if (Objects.isNull(apsOrderId)) {
+            page = invoiceService.findAll(pageable);
+        } else {
+            page = invoiceService.findByApsOrder(apsOrderId, pageable);
+        }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
