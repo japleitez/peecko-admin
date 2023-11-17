@@ -11,7 +11,16 @@ import { ItemCountComponent } from 'app/shared/pagination';
 import { FormsModule } from '@angular/forms';
 
 import { ITEMS_PER_PAGE, PAGE_HEADER, TOTAL_COUNT_RESPONSE_HEADER } from 'app/config/pagination.constants';
-import { ASC, DESC, SORT, ITEM_DELETED_EVENT, DEFAULT_SORT_DATA } from 'app/config/navigation.constants';
+import {
+  ASC,
+  DESC,
+  SORT,
+  ITEM_DELETED_EVENT,
+  DEFAULT_SORT_DATA,
+  APS_PLAN_ID,
+  COACH_ID,
+  VIDEO_CATEGORY_ID,
+} from 'app/config/navigation.constants';
 import { IVideo } from '../video.model';
 import { EntityArrayResponseType, VideoService } from '../service/video.service';
 import { VideoDeleteDialogComponent } from '../delete/video-delete-dialog.component';
@@ -42,6 +51,8 @@ export class VideoComponent implements OnInit {
   itemsPerPage = ITEMS_PER_PAGE;
   totalItems = 0;
   page = 1;
+  coachId: string | null = null;
+  videoCategoryId: string | null = null;
 
   constructor(
     protected videoService: VideoService,
@@ -101,6 +112,8 @@ export class VideoComponent implements OnInit {
     const sort = (params.get(SORT) ?? data[DEFAULT_SORT_DATA]).split(',');
     this.predicate = sort[0];
     this.ascending = sort[1] === ASC;
+    this.coachId = params.get(COACH_ID);
+    this.videoCategoryId = params.get(VIDEO_CATEGORY_ID);
   }
 
   protected onResponseSuccess(response: EntityArrayResponseType): void {
@@ -125,6 +138,12 @@ export class VideoComponent implements OnInit {
       size: this.itemsPerPage,
       sort: this.getSortQueryParam(predicate, ascending),
     };
+    if (this.coachId) {
+      queryObject.coachId = this.coachId;
+    }
+    if (this.videoCategoryId) {
+      queryObject.videoCategoryId = this.videoCategoryId;
+    }
     return this.videoService.query(queryObject).pipe(tap(() => (this.isLoading = false)));
   }
 
@@ -148,5 +167,9 @@ export class VideoComponent implements OnInit {
     } else {
       return [predicate + ',' + ascendingQueryParam];
     }
+  }
+
+  previousState(): void {
+    window.history.back();
   }
 }
