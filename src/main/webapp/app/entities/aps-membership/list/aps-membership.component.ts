@@ -11,7 +11,7 @@ import { ItemCountComponent } from 'app/shared/pagination';
 import { FormsModule } from '@angular/forms';
 
 import { ITEMS_PER_PAGE, PAGE_HEADER, TOTAL_COUNT_RESPONSE_HEADER } from 'app/config/pagination.constants';
-import { ASC, DESC, SORT, ITEM_DELETED_EVENT, DEFAULT_SORT_DATA } from 'app/config/navigation.constants';
+import { ASC, DESC, SORT, ITEM_DELETED_EVENT, DEFAULT_SORT_DATA, APS_ORDER_ID } from 'app/config/navigation.constants';
 import { IApsMembership } from '../aps-membership.model';
 import { EntityArrayResponseType, ApsMembershipService } from '../service/aps-membership.service';
 import { ApsMembershipDeleteDialogComponent } from '../delete/aps-membership-delete-dialog.component';
@@ -42,6 +42,7 @@ export class ApsMembershipComponent implements OnInit {
   itemsPerPage = ITEMS_PER_PAGE;
   totalItems = 0;
   page = 1;
+  apsOrderId: string | null = null;
 
   constructor(
     protected apsMembershipService: ApsMembershipService,
@@ -101,6 +102,7 @@ export class ApsMembershipComponent implements OnInit {
     const sort = (params.get(SORT) ?? data[DEFAULT_SORT_DATA]).split(',');
     this.predicate = sort[0];
     this.ascending = sort[1] === ASC;
+    this.apsOrderId = params.get(APS_ORDER_ID);
   }
 
   protected onResponseSuccess(response: EntityArrayResponseType): void {
@@ -125,6 +127,9 @@ export class ApsMembershipComponent implements OnInit {
       size: this.itemsPerPage,
       sort: this.getSortQueryParam(predicate, ascending),
     };
+    if (this.apsOrderId) {
+      queryObject.apsOrderId = this.apsOrderId;
+    }
     return this.apsMembershipService.query(queryObject).pipe(tap(() => (this.isLoading = false)));
   }
 
@@ -148,5 +153,9 @@ export class ApsMembershipComponent implements OnInit {
     } else {
       return [predicate + ',' + ascendingQueryParam];
     }
+  }
+
+  previousState(): void {
+    window.history.back();
   }
 }

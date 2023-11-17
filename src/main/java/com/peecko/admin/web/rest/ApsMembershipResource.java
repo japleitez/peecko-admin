@@ -141,12 +141,21 @@ public class ApsMembershipResource {
      * {@code GET  /aps-memberships} : get all the apsMemberships.
      *
      * @param pageable the pagination information.
+     * @param apsOrderId the ApsOrder ID to filter by.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of apsMemberships in body.
      */
     @GetMapping("")
-    public ResponseEntity<List<ApsMembership>> getAllApsMemberships(@org.springdoc.core.annotations.ParameterObject Pageable pageable) {
+    public ResponseEntity<List<ApsMembership>> getAllApsMemberships(
+        @org.springdoc.core.annotations.ParameterObject Pageable pageable,
+        @RequestParam(name = "apsOrderId", required = false) Long apsOrderId
+    ) {
         log.debug("REST request to get a page of ApsMemberships");
-        Page<ApsMembership> page = apsMembershipService.findAll(pageable);
+        Page<ApsMembership> page;
+        if (Objects.isNull(apsOrderId)) {
+            page = apsMembershipService.findAll(pageable);
+        } else {
+            page = apsMembershipService.findByApsOrder(apsOrderId, pageable);
+        }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
