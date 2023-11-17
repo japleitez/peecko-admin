@@ -7,3 +7,5 @@ export const CUSTOMER = 'customer';
 export const APS_PLAN_ID = 'apsPlanId';
 export const APS_ORDER_ID = 'apsOrderId';
 export const INVOICE_ID = 'invoiceId';
+export const COACH_ID = 'coachId';
+export const VIDEO_CATEGORY_ID = 'videoCategoryId';

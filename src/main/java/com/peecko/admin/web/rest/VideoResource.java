@@ -139,12 +139,27 @@ public class VideoResource {
      * {@code GET  /videos} : get all the videos.
      *
      * @param pageable the pagination information.
+     * @param coachId the Coach ID to filter by.
+     * @param videoCategoryId the VideoCategory to filter by.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of videos in body.
      */
     @GetMapping("")
-    public ResponseEntity<List<Video>> getAllVideos(@org.springdoc.core.annotations.ParameterObject Pageable pageable) {
+    public ResponseEntity<List<Video>> getAllVideos(
+        @org.springdoc.core.annotations.ParameterObject Pageable pageable,
+        @RequestParam(name = "coachId", required = false) Long coachId,
+        @RequestParam(name = "videoCategoryId", required = false) Long videoCategoryId
+    ) {
         log.debug("REST request to get a page of Videos");
-        Page<Video> page = videoService.findAll(pageable);
+        Page<Video> page;
+        if (!Objects.isNull(coachId) && !Objects.isNull(videoCategoryId)) {
+            page = videoService.findByCoachAndVideoCategory(coachId, videoCategoryId, pageable);
+        } else if (!Objects.isNull(coachId)) {
+            page = videoService.findByCoach(coachId, pageable);
+        } else if (!Objects.isNull(videoCategoryId)) {
+            page = videoService.findByVideoCategory(videoCategoryId, pageable);
+        } else {
+            page = videoService.findAll(pageable);
+        }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }

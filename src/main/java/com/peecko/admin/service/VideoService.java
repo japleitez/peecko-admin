@@ -1,6 +1,8 @@
 package com.peecko.admin.service;
 
+import com.peecko.admin.domain.Coach;
 import com.peecko.admin.domain.Video;
+import com.peecko.admin.domain.VideoCategory;
 import com.peecko.admin.repository.VideoRepository;
 import java.util.Optional;
 import org.slf4j.Logger;
@@ -120,6 +122,54 @@ public class VideoService {
     public Page<Video> findAll(Pageable pageable) {
         log.debug("Request to get all Videos");
         return videoRepository.findAll(pageable);
+    }
+
+    /**
+     * Get the videos by VideoCategory.
+     *
+     * @param videoCategoryId the VideoCategory ID to filter by.
+     * @param pageable the pagination information.
+     * @return the list of entities.
+     */
+    @Transactional(readOnly = true)
+    public Page<Video> findByVideoCategory(Long videoCategoryId, Pageable pageable) {
+        log.debug("Request to get Videos by VideoCategory");
+        VideoCategory videoCategory = new VideoCategory();
+        videoCategory.setId(videoCategoryId);
+        return videoRepository.findByVideoCategory(videoCategory, pageable);
+    }
+
+    /**
+     * Get the videos by Coach.
+     *
+     * @param coachId the Coach ID to filter by.
+     * @param pageable the pagination information.
+     * @return the list of entities.
+     */
+    @Transactional(readOnly = true)
+    public Page<Video> findByCoach(Long coachId, Pageable pageable) {
+        log.debug("Request to get Videos by Coach");
+        Coach coach = new Coach();
+        coach.setId(coachId);
+        return videoRepository.findByCoach(coach, pageable);
+    }
+
+    /**
+     * Get the videos by Coach and VideoCategory.
+     *
+     * @param coachId the Coach ID to filter by.
+     * @param videoCategoryId the VideoCategory ID to filter by.
+     * @param pageable the pagination information.
+     * @return the list of entities.
+     */
+    @Transactional(readOnly = true)
+    public Page<Video> findByCoachAndVideoCategory(Long coachId, Long videoCategoryId, Pageable pageable) {
+        log.debug("Request to get Videos by Coach and VideoCategory");
+        Coach coach = new Coach();
+        coach.setId(coachId);
+        VideoCategory videoCategory = new VideoCategory();
+        videoCategory.setId(videoCategoryId);
+        return videoRepository.findByCoachAndVideoCategory(coach, videoCategory, pageable);
     }
 
     /**

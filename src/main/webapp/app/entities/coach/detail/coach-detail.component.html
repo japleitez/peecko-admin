@@ -67,6 +67,16 @@
       <button type="button" [routerLink]="['/coach', coach.id, 'edit']" class="btn btn-primary">
         <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
       </button>
+
+      <button
+        type="button"
+        [routerLink]="['/video']"
+        [queryParams]="{ coachId: coach.id }"
+        queryParamsHandling="merge"
+        class="btn btn-primary"
+      >
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Video</span>
+      </button>
     </div>
   </div>
 </div>
