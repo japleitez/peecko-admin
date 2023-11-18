@@ -130,7 +130,7 @@ export class ContactComponent implements OnInit {
       sort: this.getSortQueryParam(predicate, ascending),
     };
     if (this.customerId) {
-      queryObject.customer = this.customerId;
+      queryObject.customerId = this.customerId;
     }
     return this.contactService.query(queryObject).pipe(tap(() => (this.isLoading = false)));
   }
