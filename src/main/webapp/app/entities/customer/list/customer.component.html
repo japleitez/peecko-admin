@@ -3,6 +3,10 @@
     <span>Customers</span>
 
     <div class="d-flex justify-content-end">
+        <button class="btn btn-info" (click)="previousState()" data-cy="entityListBackButton" *ngIf="agencyId">
+          <fa-icon icon="arrow-left"></fa-icon>
+          <span>Back</span></button>&nbsp;
+
       <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
         <span>Refresh list</span>

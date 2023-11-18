@@ -1,5 +1,6 @@
 package com.peecko.admin.service;
 
+import com.peecko.admin.domain.Agency;
 import com.peecko.admin.domain.Customer;
 import com.peecko.admin.repository.CustomerRepository;
 import java.util.Optional;
@@ -131,6 +132,20 @@ public class CustomerService {
         return customerRepository.findAll(pageable);
     }
 
+    /**
+     * Get the customers by Agency.
+     *
+     * @param agencyId the Agency ID to filter by.
+     * @param pageable the pagination information.
+     * @return the list of entities.
+     */
+    @Transactional(readOnly = true)
+    public Page<Customer> findByAgency(Long agencyId, Pageable pageable) {
+        log.debug("Request to get Customers by Agency");
+        Agency agency = new Agency();
+        agency.setId(agencyId);
+        return customerRepository.findByAgency(agency, pageable);
+    }
     /**
      * Get one customer by id.
      *
