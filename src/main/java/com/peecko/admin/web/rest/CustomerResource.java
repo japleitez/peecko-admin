@@ -141,12 +141,19 @@ public class CustomerResource {
      * {@code GET  /customers} : get all the customers.
      *
      * @param pageable the pagination information.
+     * @param agencyId the Agency ID to filter by.
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of customers in body.
      */
     @GetMapping("")
-    public ResponseEntity<List<Customer>> getAllCustomers(@org.springdoc.core.annotations.ParameterObject Pageable pageable) {
+    public ResponseEntity<List<Customer>> getAllCustomers(@org.springdoc.core.annotations.ParameterObject Pageable pageable,
+                                                          @RequestParam(name = "agencyId", required = false) Long agencyId) {
         log.debug("REST request to get a page of Customers");
-        Page<Customer> page = customerService.findAll(pageable);
+        Page<Customer> page;
+        if (Objects.isNull(agencyId)) {
+            page = customerService.findAll(pageable);
+        } else {
+            page = customerService.findByAgency(agencyId, pageable);
+        }
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }

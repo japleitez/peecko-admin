@@ -105,7 +105,7 @@
       <button
         type="button"
         [routerLink]="['/contact']"
-        [queryParams]="{ customer: customer.id }"
+        [queryParams]="{ customerId: customer.id }"
         queryParamsHandling="merge"
         class="btn btn-primary"
       >
@@ -115,11 +115,11 @@
       <button
         type="button"
         [routerLink]="['/aps-plan']"
-        [queryParams]="{ customer: customer.id }"
+        [queryParams]="{ customerId: customer.id }"
         queryParamsHandling="merge"
         class="btn btn-primary"
       >
-        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>App. Plans</span>
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>ApsPlans</span>
       </button>
     </div>
   </div>
