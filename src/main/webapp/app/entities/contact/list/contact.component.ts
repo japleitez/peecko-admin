@@ -11,7 +11,7 @@ import { ItemCountComponent } from 'app/shared/pagination';
 import { FormsModule } from '@angular/forms';
 
 import { ITEMS_PER_PAGE, PAGE_HEADER, TOTAL_COUNT_RESPONSE_HEADER } from 'app/config/pagination.constants';
-import { ASC, DESC, SORT, ITEM_DELETED_EVENT, DEFAULT_SORT_DATA, CUSTOMER } from 'app/config/navigation.constants';
+import { ASC, DESC, SORT, ITEM_DELETED_EVENT, DEFAULT_SORT_DATA, CUSTOMER_ID } from 'app/config/navigation.constants';
 import { IContact } from '../contact.model';
 import { EntityArrayResponseType, ContactService } from '../service/contact.service';
 import { ContactDeleteDialogComponent } from '../delete/contact-delete-dialog.component';
@@ -104,7 +104,7 @@ export class ContactComponent implements OnInit {
     const sort = (params.get(SORT) ?? data[DEFAULT_SORT_DATA]).split(',');
     this.predicate = sort[0];
     this.ascending = sort[1] === ASC;
-    this.customerId = params.get(CUSTOMER);
+    this.customerId = params.get(CUSTOMER_ID);
   }
 
   protected onResponseSuccess(response: EntityArrayResponseType): void {

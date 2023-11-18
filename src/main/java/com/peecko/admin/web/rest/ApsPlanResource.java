@@ -147,7 +147,7 @@ public class ApsPlanResource {
     @GetMapping("")
     public ResponseEntity<List<ApsPlan>> getAllApsPlans(
         @org.springdoc.core.annotations.ParameterObject Pageable pageable,
-        @RequestParam(name = "customer", required = false) Long customerId
+        @RequestParam(name = "customerId", required = false) Long customerId
     ) {
         log.debug("REST request to get a page of ApsPlans");
         Page<ApsPlan> page;
