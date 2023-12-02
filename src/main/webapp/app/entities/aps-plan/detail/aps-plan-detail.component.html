@@ -26,10 +26,6 @@
             <dd>
               <span>{{ apsPlan.pricing }}</span>
             </dd>
-            <dt><span>State</span></dt>
-            <dd>
-              <span>{{ apsPlan.state }}</span>
-            </dd>
             <dt><span>License</span></dt>
             <dd>
               <span>{{ apsPlan.license }}</span>
@@ -42,21 +38,25 @@
         </div>
         <div class="boxInline">
           <dl class="row-md jh-entity-details">
+            <dt><span>State</span></dt>
+            <dd>
+              <span>{{ apsPlan.state }}</span>
+            </dd>
             <dt><span>Starts</span></dt>
             <dd>
-              <span>{{ apsPlan?.starts | formatMediumDatetime }}</span>
+              <span>{{ apsPlan.starts | formatMediumDatetime }}</span>
             </dd>
             <dt><span>Ends</span></dt>
             <dd>
-              <span>{{ apsPlan?.ends | formatMediumDatetime }}</span>
+              <span>{{ apsPlan.ends | formatMediumDatetime }}</span>
             </dd>
             <dt><span>Trial Starts</span></dt>
             <dd>
-              <span>{{ apsPlan?.trialStarts | formatMediumDatetime }}</span>
+              <span>{{ apsPlan.trialStarts | formatMediumDatetime }}</span>
             </dd>
             <dt><span>Trial Ends</span></dt>
             <dd>
-              <span>{{ apsPlan?.trialEnds | formatMediumDatetime }}</span>
+              <span>{{ apsPlan.trialEnds | formatMediumDatetime }}</span>
             </dd>
             <dt><span>Created</span></dt>
             <dd>

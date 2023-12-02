@@ -18,10 +18,6 @@
             <dd>
               <span>{{ contact.id }}</span>
             </dd>
-            <dt><span>Type</span></dt>
-            <dd>
-              <span>{{ contact.type }}</span>
-            </dd>
             <dt><span>Name</span></dt>
             <dd>
               <span>{{ contact.name }}</span>
@@ -46,6 +42,14 @@
             <dd>
               <span>{{ contact.country }}</span>
             </dd>
+          </dl>
+        </div>
+        <div class="boxInline">
+          <dl class="row-md jh-entity-details">
+            <dt><span>Type</span></dt>
+            <dd>
+              <span>{{ contact.type }}</span>
+            </dd>
             <dt><span>Email</span></dt>
             <dd>
               <span>{{ contact.email }}</span>
@@ -54,10 +58,6 @@
             <dd>
               <span>{{ contact.phone }}</span>
             </dd>
-          </dl>
-        </div>
-        <div class="boxInline">
-          <dl class="row-md jh-entity-details">
             <dt><span>Created</span></dt>
             <dd>
               <span>{{ contact.created | formatMediumDatetime }}</span>
