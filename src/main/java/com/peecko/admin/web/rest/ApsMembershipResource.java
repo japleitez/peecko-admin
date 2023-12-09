@@ -1,8 +1,12 @@
 package com.peecko.admin.web.rest;
 
 import com.peecko.admin.domain.ApsMembership;
+import com.peecko.admin.domain.ApsOrder;
 import com.peecko.admin.repository.ApsMembershipRepository;
+import com.peecko.admin.repository.ApsOrderRepository;
+import com.peecko.admin.service.ApsMembershipBulkService;
 import com.peecko.admin.service.ApsMembershipService;
+import com.peecko.admin.service.dto.ApsMembershipDTO;
 import com.peecko.admin.web.rest.errors.BadRequestAlertException;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -19,6 +23,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.PaginationUtil;
@@ -40,11 +45,17 @@ public class ApsMembershipResource {
 
     private final ApsMembershipService apsMembershipService;
 
+    private final ApsMembershipBulkService apsMembershipBulkService;
+
     private final ApsMembershipRepository apsMembershipRepository;
 
-    public ApsMembershipResource(ApsMembershipService apsMembershipService, ApsMembershipRepository apsMembershipRepository) {
+    private final ApsOrderRepository apsOrderRepository;
+
+    public ApsMembershipResource(ApsMembershipService apsMembershipService, ApsMembershipBulkService apsMembershipBulkService, ApsMembershipRepository apsMembershipRepository, ApsOrderRepository apsOrderRepository) {
         this.apsMembershipService = apsMembershipService;
+        this.apsMembershipBulkService = apsMembershipBulkService;
         this.apsMembershipRepository = apsMembershipRepository;
+        this.apsOrderRepository = apsOrderRepository;
     }
 
     /**
@@ -187,5 +198,16 @@ public class ApsMembershipResource {
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
             .build();
+    }
+
+    @PostMapping("/bulk/import")
+    public ResponseEntity<Void> createBulkMembership(@RequestParam("membershipFile") MultipartFile file, @RequestParam(value = "orderId") Long orderId) {
+        log.debug("REST request to creat bulk ApsMembership : {}", file.getName());
+        ApsOrder apsOrder = apsOrderRepository
+            .findById(orderId)
+            .orElseThrow(() -> new BadRequestAlertException("Invalid Order Id", "apsOrder", "orderId"));
+        List<ApsMembershipDTO> members = apsMembershipBulkService.convertFile(apsOrder, file);
+        apsMembershipBulkService.saveOrUpdateMemberList(apsOrder, members);
+        return ResponseEntity.noContent().build();
     }
 }

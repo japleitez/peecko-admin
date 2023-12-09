@@ -73,6 +73,13 @@ public class ApsOrder implements Serializable {
         return this.id;
     }
 
+    public ApsOrder() {
+    }
+
+    public ApsOrder(Long id) {
+        this.id = id;
+    }
+
     public ApsOrder id(Long id) {
         this.setId(id);
         return this;
