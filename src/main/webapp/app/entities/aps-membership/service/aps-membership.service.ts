@@ -6,6 +6,7 @@ import { isPresent } from 'app/core/util/operators';
 import { ApplicationConfigService } from 'app/core/config/application-config.service';
 import { createRequestOption } from 'app/core/request/request-util';
 import { IApsMembership, NewApsMembership } from '../aps-membership.model';
+import {Form} from "@angular/forms";
 
 export type PartialUpdateApsMembership = Partial<IApsMembership> & Pick<IApsMembership, 'id'>;
 
@@ -48,6 +49,10 @@ export class ApsMembershipService {
 
   delete(id: number): Observable<HttpResponse<{}>> {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
+  }
+
+  uploadMembershipFile(formData: FormData): Observable<HttpResponse<{}>> {
+    return this.http.post(`${this.resourceUrl}/bulk/import`, formData, { observe: 'response' });
   }
 
   getApsMembershipIdentifier(apsMembership: Pick<IApsMembership, 'id'>): number {

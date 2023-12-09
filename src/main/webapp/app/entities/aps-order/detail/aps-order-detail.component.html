@@ -60,6 +60,16 @@
         </div>
       </div>
 
+      <dl>
+        <dt><span>File</span></dt>
+        <dd>
+          <span><input (change)="this.onFilechange($event)" type="file" id="membershipFile"/></span>
+        </dd>
+        <dt><span>Action</span></dt>
+        <dd><span><button (click)="this.upload()"> Upload</button></span>
+        </dd>
+      </dl>
+
       <ng-container [ngTemplateOutlet]="detailControls"] [ngTemplateOutletContext]="{ apsOrder: apsOrder}"]></ng-container>
 
     </div>

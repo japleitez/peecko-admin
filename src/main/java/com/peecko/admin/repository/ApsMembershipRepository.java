@@ -7,6 +7,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 /**
  * Spring Data JPA repository for the ApsMembership entity.
  */
@@ -14,4 +16,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ApsMembershipRepository extends JpaRepository<ApsMembership, Long> {
     Page<ApsMembership> findByApsOrder(ApsOrder apsOrder, Pageable pageable);
+    ApsMembership findByApsOrderAndUsername(ApsOrder apsOrder, String username);
 }

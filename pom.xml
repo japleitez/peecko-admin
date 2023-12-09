@@ -63,6 +63,8 @@
         <maven-war-plugin.version>3.4.0</maven-war-plugin.version>
         <modernizer-maven-plugin.version>2.7.0</modernizer-maven-plugin.version>
         <nohttp-checkstyle.version>0.0.11</nohttp-checkstyle.version>
+        <jackson-dataformat-csv.version>2.16.0</jackson-dataformat-csv.version>
+        <lombok.version>1.18.30</lombok.version>
         <profile.api-docs/>
         <profile.e2e/>
         <profile.no-liquibase/>
@@ -178,6 +180,12 @@
         <dependency>
             <groupId>com.fasterxml.jackson.module</groupId>
             <artifactId>jackson-module-jaxb-annotations</artifactId>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-csv -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.dataformat</groupId>
+            <artifactId>jackson-dataformat-csv</artifactId>
+            <version>${jackson-dataformat-csv.version}</version>
         </dependency>
         <dependency>
             <groupId>com.tngtech.archunit</groupId>
