@@ -4,37 +4,23 @@
   </h2>
 
   <div class="d-flex justify-content-center">
-
-    <form class="example-form">
-      <mat-form-field class="example-full-width">
-        <mat-label>Assignee</mat-label>
-        <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
-        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-          @for (option of filteredOptions | async; track option) {
-          <mat-option [value]="option"> {{option.name}} </mat-option>
-          }
-        </mat-autocomplete>
-      </mat-form-field>
-    </form>
-
-    <button class="btn btn-info" (click)="previousState()" data-cy="entityListBackButton" *ngIf="apsPlanId">
-      <fa-icon icon="arrow-left"></fa-icon>
-      <span>Back</span>
-    </button>
-
-    <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
-      <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
-      <span>Refresh list</span>
-    </button>
-
-    <button
-      id="jh-create-entity"
-      data-cy="entityCreateButton"
-      class="btn btn-primary jh-create-entity create-aps-order"
-      [routerLink]="['/aps-order/new']">
-      <fa-icon icon="plus"></fa-icon>
-      <span>Create a new Aps Order</span>
-    </button>
+    <section>
+      <div class="sec-cell-label">Search: </div>
+      <div class="sec-cell-button-row ">
+          <mat-form-field class="example-full-width" >
+            <mat-label>Customer</mat-label>
+            <input type="text" matInput [formControl]="customer" [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+              @for (option of filteredCustomers | async; track option) {
+              <mat-option [value]="option"> {{option.name}} </mat-option>
+              }
+            </mat-autocomplete>
+          </mat-form-field>
+          <button mat-button mat-raised-button (click)="previousState()"  *ngIf="apsPlanId">Back</button>
+          <button mat-button mat-raised-button color="accent" (click)="load()" [disabled]="isLoading">Refresh</button>
+          <button mat-button mat-raised-button color="warn" [routerLink]="['/aps-order/new']">New</button>
+      </div>
+    </section>
   </div>
 
   <jhi-alert-error></jhi-alert-error>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpHeaders } from '@angular/common/http';
 import { ActivatedRoute, Data, ParamMap, Router, RouterModule } from '@angular/router';
-import {combineLatest, filter, Observable, switchMap} from 'rxjs';
+import { combineLatest, filter, Observable, switchMap } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 import SharedModule from 'app/shared/shared.module';
@@ -18,11 +18,12 @@ import { ApsOrderDeleteDialogComponent } from '../delete/aps-order-delete-dialog
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatInputModule } from "@angular/material/input";
 import { MatAutocompleteModule } from "@angular/material/autocomplete";
+import { MatButtonModule } from "@angular/material/button";
 import { AsyncPipe } from "@angular/common";
-import {map, startWith, tap} from "rxjs/operators";
+import { map, startWith, tap } from "rxjs/operators";
 
 export interface cInfo {
-  id: string;
+  id: number;
   name: string;
 }
 
@@ -42,15 +43,16 @@ export interface cInfo {
     ItemCountComponent,
     MatFormFieldModule,
     MatInputModule,
+    MatButtonModule,
     MatAutocompleteModule,
     ReactiveFormsModule,
     AsyncPipe,
   ],
 })
 export class ApsOrderComponent implements OnInit {
-  myControl = new FormControl<string | cInfo>('');
-  options: cInfo[] = [{id:'1', name: 'KPMG'}, {id:'2', name: 'PwCo'}, {id:'3', name: 'E&Y'}, {id:'4', name: 'Deloitte'}];
-  filteredOptions: Observable<cInfo[]>;
+  customer = new FormControl<string | cInfo>('');
+  customers: cInfo[] = [{id:1, name: 'KPMG'}, {id:2, name: 'PwC'}, {id:3, name: 'E&Y'}, {id:4, name: 'Deloitte'}];
+  filteredCustomers: Observable<cInfo[]>;
 
   apsOrders?: IApsOrder[];
   isLoading = false;
@@ -73,11 +75,11 @@ export class ApsOrderComponent implements OnInit {
   trackId = (_index: number, item: IApsOrder): number => this.apsOrderService.getApsOrderIdentifier(item);
 
   ngOnInit(): void {
-    this.filteredOptions = this.myControl.valueChanges.pipe(
+    this.filteredCustomers = this.customer.valueChanges.pipe(
       startWith(''),
       map(value => {
         const name = typeof value === 'string' ? value : value?.name;
-        return name ? this._filter(name as string) : this.options.slice();
+        return name ? this._filter(name as string) : this.customers.slice();
       }),
     );
     this.load();
@@ -88,7 +90,7 @@ export class ApsOrderComponent implements OnInit {
 
   private _filter(name: string): cInfo[] {
     const filterValue = name.toLowerCase();
-    return this.options.filter(option => option.name.toLowerCase().includes(filterValue));
+    return this.customers.filter(option => option.name.toLowerCase().includes(filterValue));
   }
 
   delete(apsOrder: IApsOrder): void {
